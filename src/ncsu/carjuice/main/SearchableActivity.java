@@ -32,7 +32,8 @@ public class SearchableActivity extends Activity{
 	}
 
 	
-	//Do something with the search query
+	
+	//Do something with the search query. This block is not reached because StartActivity is being called
 	public void doMySearch(String query) {
 		TextView textView = new TextView(this);
 		textView.setTextSize(40);

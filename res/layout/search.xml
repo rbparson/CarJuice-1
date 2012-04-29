@@ -10,5 +10,12 @@
         android:layout_height="wrap_content"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="103dp"
+        android:onClick="sendMessage"
+        android:text="@string/button_locate" />
 
 </LinearLayout>
