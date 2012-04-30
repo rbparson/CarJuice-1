@@ -18,7 +18,6 @@ public class ResultsListActivity extends ListActivity {
 	
 	final Context context = this;	
 	
-	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{

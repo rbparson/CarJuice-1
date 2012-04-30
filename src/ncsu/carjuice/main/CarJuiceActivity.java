@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-//Test comment
 public class CarJuiceActivity extends Activity {
 	
 	//Can add things like strings to an intent and send those along too
@@ -20,8 +18,7 @@ public class CarJuiceActivity extends Activity {
         //Open the search dialogue on app-launch
         onSearchRequested();
     }
-    
-    
+
     //Message sent by "Locate" button. Sends an intent to the listview activity
     public void sendMessage(View view) {
     	
