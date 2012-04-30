@@ -1,11 +1,16 @@
 package ncsu.carjuice.main;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-//Test comment
+
+
 public class CarJuiceActivity extends Activity {
 	
 	//Can add things like strings to an intent and send those along too
@@ -16,6 +21,32 @@ public class CarJuiceActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+//-----------------Get location code------------------------------------------------------------------------
+     // Acquire a reference to the system Location Manager
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        // Define a listener that responds to location updates
+        LocationListener locationListener = new LocationListener() {
+            
+        	@Override
+        	public void onLocationChanged(Location location) {      
+        		// Called when a new location is found by the network location provider.      
+        		//makeUseOfNewLocation(location); wrote this method    
+        	}    
+        	
+        	public void onStatusChanged(String provider, int status, Bundle extras) {}
+        	
+        	public void onProviderEnabled(String provider) {}    
+        	
+        	public void onProviderDisabled(String provider) {}
+ 
+        };
+        	
+        // Register the listener with the Location Manager to receive location updates
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        
+//-----------------end location code-----------------------------------------------------------------------
         
         //Open the search dialogue on app-launch
         onSearchRequested();
@@ -39,5 +70,7 @@ public class CarJuiceActivity extends Activity {
     	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
     	startActivity(intent);
     }
+    
+   
     
 }
