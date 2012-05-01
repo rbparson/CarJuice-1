@@ -2,11 +2,8 @@ package ncsu.carjuice.main;
 
 import ncsu.carjuice.main.GetLocation.LocationResult;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 
@@ -35,16 +32,7 @@ public class CarJuiceActivity extends Activity {
         
 //----------------------------------end get location--------------------        
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         
         //Open the search dialogue on app-launch
         onSearchRequested();
