@@ -1,5 +1,6 @@
 package ncsu.carjuice.main;
 
+import ncsu.carjuice.main.GetLocation.LocationResult;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,31 +21,30 @@ public class CarJuiceActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-//-----------------Get location code------------------------------------------------------------------------
-     // Acquire a reference to the system Location Manager
-        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
-        // Define a listener that responds to location updates
-        LocationListener locationListener = new LocationListener() {
-            
-        	@Override
-        	public void onLocationChanged(Location location) {      
-        		// Called when a new location is found by the network location provider.      
-        		//makeUseOfNewLocation(location); wrote this method    
-        	}    
-        	
-        	public void onStatusChanged(String provider, int status, Bundle extras) {}
-        	
-        	public void onProviderEnabled(String provider) {}    
-        	
-        	public void onProviderDisabled(String provider) {}
- 
-        };
-        	
-        // Register the listener with the Location Manager to receive location updates
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+//----------------------------------get location--------------------
         
-//-----------------end location code-----------------------------------------------------------------------
+        LocationResult locationResult = new LocationResult(){
+            @Override
+            public void gotLocation(Location location){
+                //Got the location!
+            	// now use location.methods to get long and lat to pass to http request
+            }
+        };
+        GetLocation myLocation = new GetLocation();
+        myLocation.getLocation(this, locationResult);        
+        
+//----------------------------------end get location--------------------        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         //Open the search dialogue on app-launch
         onSearchRequested();
