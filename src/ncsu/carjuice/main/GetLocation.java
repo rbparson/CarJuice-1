@@ -8,55 +8,70 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+/**
+ * 
+ * @author Jason Brown
+ * @version 1.2
+ */
 public class GetLocation {
-    Timer timer1;
-    LocationManager lm;
+    
+	Timer timer;
+    LocationManager locationManager;
     LocationResult locationResult;
-    boolean gps_enabled=false;
-    boolean network_enabled=false;
+    boolean isGpsEnabled=false;
+    boolean isNetworkEnabled=false;
 
-    public boolean getLocation(Context context, LocationResult result)
-    {
+    public boolean getLocation(Context context, LocationResult result) {
         //I use LocationResult callback class to pass location value from MyLocation to user code.
         locationResult=result;
-        if(lm==null)
-            lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-
+        if(locationManager==null) {
+            locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        }
+        
         //exceptions will be thrown if provider is not permitted.
-        try{gps_enabled=lm.isProviderEnabled(LocationManager.GPS_PROVIDER);}catch(Exception ex){}
-        try{network_enabled=lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);}catch(Exception ex){}
+        try{
+        	isGpsEnabled=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        }catch(Exception ex){}
+        
+        try{
+        	isNetworkEnabled=locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        }catch(Exception ex){}
 
         //don't start listeners if no provider is enabled
-        if(!gps_enabled && !network_enabled)
+        if(!isGpsEnabled && !isNetworkEnabled)
             return false;
 
-        if(gps_enabled)
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGps);
-        if(network_enabled)
-            lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetwork);
-        timer1=new Timer();
-        timer1.schedule(new GetLastLocation(), 20000);
+        if(isGpsEnabled) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGps);
+        }
+        
+        if(isNetworkEnabled) {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetwork);
+        }
+        
+        timer=new Timer();
+        timer.schedule(new GetLastLocation(), 20000);
         return true;
     }
 
     LocationListener locationListenerGps = new LocationListener() {
-        public void onLocationChanged(Location location) {
-            timer1.cancel();
-            locationResult.gotLocation(location);
-            lm.removeUpdates(this);
-            lm.removeUpdates(locationListenerNetwork);
-        }
-        public void onProviderDisabled(String provider) {}
-        public void onProviderEnabled(String provider) {}
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
+    	public void onLocationChanged(Location location) {
+    		timer.cancel();
+    		locationResult.gotLocation(location);
+    		locationManager.removeUpdates(this);
+    		locationManager.removeUpdates(locationListenerNetwork);
+    	}
+    	public void onProviderDisabled(String provider) {}
+       	public void onProviderEnabled(String provider) {}
+       	public void onStatusChanged(String provider, int status, Bundle extras) {}
     };
 
     LocationListener locationListenerNetwork = new LocationListener() {
         public void onLocationChanged(Location location) {
-            timer1.cancel();
+            timer.cancel();
             locationResult.gotLocation(location);
-            lm.removeUpdates(this);
-            lm.removeUpdates(locationListenerGps);
+            locationManager.removeUpdates(this);
+            locationManager.removeUpdates(locationListenerGps);
         }
         public void onProviderDisabled(String provider) {}
         public void onProviderEnabled(String provider) {}
@@ -66,30 +81,36 @@ public class GetLocation {
     class GetLastLocation extends TimerTask {
         @Override
         public void run() {
-             lm.removeUpdates(locationListenerGps);
-             lm.removeUpdates(locationListenerNetwork);
+             locationManager.removeUpdates(locationListenerGps);
+             locationManager.removeUpdates(locationListenerNetwork);
 
-             Location net_loc=null, gps_loc=null;
-             if(gps_enabled)
-                 gps_loc=lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-             if(network_enabled)
-                 net_loc=lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
+             Location netwworkLocation=null, gpsLocation=null;
+             if(isGpsEnabled){
+                 gpsLocation=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+             }
+             
+             if(isNetworkEnabled){
+                 netwworkLocation=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+             }
+             
              //if there are both values use the latest one
-             if(gps_loc!=null && net_loc!=null){
-                 if(gps_loc.getTime()>net_loc.getTime())
-                     locationResult.gotLocation(gps_loc);
-                 else
-                     locationResult.gotLocation(net_loc);
+             if(gpsLocation!=null && netwworkLocation!=null){
+                 if(gpsLocation.getTime()>netwworkLocation.getTime()){
+                     locationResult.gotLocation(gpsLocation);
+                 }
+                 else{
+                     locationResult.gotLocation(netwworkLocation);
+                 }
                  return;
              }
 
-             if(gps_loc!=null){
-                 locationResult.gotLocation(gps_loc);
+             if(gpsLocation!=null){
+                 locationResult.gotLocation(gpsLocation);
                  return;
              }
-             if(net_loc!=null){
-                 locationResult.gotLocation(net_loc);
+             
+             if(netwworkLocation!=null){
+                 locationResult.gotLocation(netwworkLocation);
                  return;
              }
              locationResult.gotLocation(null);
