@@ -16,8 +16,12 @@ public class StationInfo {
 	private String zip;								//The ZIP code (postal code) of the station's location.
 	private String plus4;							//The plus-4 portion of the station's ZIP code (U.S. ZIP codes only).
 	private String phoneNumber;						//The phone number of the station.
+	
+	//might remove these- only get currently open stations
 	private String statusCode;						//E	= The station is open, P = Planned: The station is not yet open or the station is temporarily out of service. See the "expectedDate" for an anticipated open date.
 	private String expectedDate;					//For planned stations, the date the station is expected to open or reopen
+	
+	
 	private String groupsWithAccess;				//A description of who is allowed to access the station and other station access information
 	private String operationHours;					//Hours of operation for the station.
 	private String cardsAccepted;					//A space-separated list of payment methods accepted. Possible payment methods: A, D, M, V, Cash, Checks, CFN, CleanEnergy, FuelMan, GasCard, PHH, Voyager, Wright_Exp 
