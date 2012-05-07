@@ -48,7 +48,7 @@ public class CarJuiceActivity extends Activity {
         onSearchRequested();
         
         //call JSON worker to parse JSON String
-        JsonWorker worker = new JsonWorker();
+        //ParseJaSON JSONParser = new ParseJaSON();
     }
 
     //Message sent by "Locate" button. Sends an intent to the listview activity
