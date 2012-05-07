@@ -13,72 +13,25 @@ import android.util.Log;
  * @version 1.3
  * JSONWorker Class- Gets JSON data from URL and parses it into an array of Stations, with each station populated with information for that station.
  */
-public class JsonWorker {
+public class ParseJaSON {
 
-	//GET http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.format?parameters
-	//final URL format = baseURL + dataType + apiKeyParameter + fuelTypeParameter + status code = E == Open Stations Only
-	private String baseURL = "http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=f46ab87903614bc4dc864b057bc0fb543d197900&fuel_type=ELEC&status=E";       
-	
-	
-	// location and any other params need "&" before parameter 
-	private String location ="&location=";				//REQUIRES parameter (Longitude AND Latitude)  or free form distance 
-	private String latitude ="&latitude=";
-	private String longitude ="&longitude=";
-	
-	//using sample JSON String below to test with, had to add escapes (/) before each (") Retrieved from site using URL below with required Parameter Location=27607
-	//http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=f46ab87903614bc4dc864b057bc0fb543d197900&status=E&limit=2&fuel_type=ELEC&location=27607
-	private String jsonString ="{latitude: 35.8019142,longitude: -78.6875364,precision: {name: \"postal_code\",types: [\"postal_code\"],value: 5},station_locator_url: " +
-			"\"http://www.afdc.energy.gov/afdc/locator/stations/\",total_results: 23,offset: 0,fuel_stations: [{access_days_time: \"24 hours daily\",bd_blends: null,cards_accepted: null,city: " +
-			"\"Raleigh\",date_last_confirmed: \"2012-02-29\",expected_date: null,fuel_type_code: \"ELEC\",geocode_status: \"200-8\",groups_with_access_code: \"Public - see hours\",intersection_directions:" +
-			" null,latitude: 35.7828039,longitude: -78.683243,open_date: \"2012-02-01\",owner_type_code: \"SG\",plus4: null,station_name: \"North Carolina State University - Joyner Visitor Center\",station_phone:" +
-			" \"919-513-1200\",status_code: \"E\",street_address: \"1210 Varsity Dr\",zip: \"27606\",state: \"NC\",ng_fill_type_code: null,ng_psi: null,ev_level1_evse_num: 1,ev_level2_evse_num: 1,ev_dc_fast_num:" +
-			" null,ev_other_evse: null,ev_network: null,ev_network_web: null,id: 43880,updated_at: null,distance: 1.33944},{access_days_time: \"24 hours daily\",bd_blends: null,cards_accepted: null,city:" +
-			" \"Raleigh\",date_last_confirmed: \"2012-02-29\",expected_date: null,fuel_type_code: \"ELEC\",geocode_status: \"GPS\",groups_with_access_code: \"Public - see hours\",intersection_directions: " +
-			"\"Gorman Ave between Varsity and western\",latitude: 35.782144,longitude: -78.686442,open_date: \"2012-02-20\",owner_type_code: \"SG\",plus4: null,station_name: \"North Carolina State University " +
-			"- McKimmon Center and Solar House\",station_phone: \"503-892-7345\",status_code: \"E\",street_address: \"1201 Gorman Ave\",zip: \"27606\",state: \"NC\",ng_fill_type_code: null,ng_psi: null," +
-			"ev_level1_evse_num: null,ev_level2_evse_num: 2,ev_dc_fast_num: null,ev_other_evse: null,ev_network: null,ev_network_web: null,id: 43324,updated_at: \"2012-03-14T17:33:35Z\",distance: 1.36443}]}";
-	
-	
-	private JSONObject MainJSONObject;
+
 	StationInfo[] stationsArray;
-	static final String LOG_TAG = "JSON";
-	
+	JSONObject mainJSONObject;
+	static final String LOG_TAG = "ParseJaSON";
+	private String location;
+	private String latitude;
+	private String longitude;
+		
 	
 	/**
 	 * Default constructor, mostly using for testing currently
 	 */
-	public JsonWorker() {
-		
-		parseStationInfo();
-		
-	}
-	
-	/**
-	 * Main Constructor- used to get station info, given a latitude and longitude
-	 * @param latitude
-	 * @param longitude
-	 */
-	public JsonWorker(Double latitude, Double longitude){
-		this.latitude += latitude;
-		this.longitude += longitude;
-		
-		//getUrlCurrentLocation("34.234", "56.56");
-		
-		parseStationInfo();
+	public ParseJaSON(JSONObject mainJSONObject) {	
+		this.mainJSONObject = mainJSONObject;
 	}
 	
 	
-	/**
-	 * Second Constructor - used to get Station info, given a free form string input of location by user
-	 * @param Location
-	 */
-	public JsonWorker(String location){
-		this.location += location;
-		
-		parseStationInfo();
-	}
-	
-
 	/**
 	 * Method to return a StationInfo Array, loaded up with all stations and their info
 	 * @return StationsInfo[]
@@ -89,49 +42,34 @@ public class JsonWorker {
 	
 	
 //---------------------------------------------Private Methods--------------------------------------------------------------------------------------------------------
-	// need to get URL, constructed from current user location, OR from user input	
-	/**
-	 * Method to get the needed URL for retrieving the correct JSON object, given a users Longitude and Latitude
-	 * @return Full URL String
-	 */
-	private String getUrlCurrentLocation(){
-		String fullURL = baseURL + latitude + longitude;
-		Log.d(LOG_TAG, "longitude is " + this.longitude + " and latitude is " + this.latitude);
-		Log.d(LOG_TAG, "Full URL = " + fullURL);
-		return fullURL;
-	}
-		
-	/**
-	 * Method to get the needed URL used to retrieve the JSON object, given a free form Location string from user input
-	 * @return Full URL String
-	 */
-	private String getUrlOtherLocation(){
-		String fullURL = baseURL + location;
-		Log.d(LOG_TAG, "Location input by user " + location);
-		Log.d(LOG_TAG, "Full URL = " + fullURL);
-		return fullURL;
-	}
-	
 	//using JSON string from http request below to test
 	//http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=f46ab87903614bc4dc864b057bc0fb543d197900&status=E&limit=2&fuel_type=ELEC&location=27607
 	/**
 	 * Method to parse JSON Object and populate StationInfo Array with Stations and details for each
 	 */
-	private void parseStationInfo(){ 
+	private void parseStationInfo(JSONObject mainJSONObject){ 
+		if(mainJSONObject != null && !mainJSONObject.equals("")){
+			this.mainJSONObject = mainJSONObject;
+		}
+		else{
+			Log.e(LOG_TAG, "JSON object was null or empty string");
+		}
 		JSONArray JSONStationsArray = null;
 		StationInfo station = null;
 		
+		/**
 		try {
 			MainJSONObject = new JSONObject(jsonString);
 		} catch (JSONException e) {
-			Log.d(LOG_TAG, "Could not find MainJSONobject");
+			Log.e(LOG_TAG, "Could not find MainJSONobject");
 		}
+		*/
 		
 		try {
-			JSONStationsArray = MainJSONObject.getJSONArray("fuel_stations");
-			Log.d(LOG_TAG, "The number of stations to parse is =" + JSONStationsArray.length());
+			JSONStationsArray = mainJSONObject.getJSONArray("fuel_stations");
+			Log.e(LOG_TAG, "The number of stations to parse is =" + JSONStationsArray.length());
 		} catch (JSONException e) {
-			Log.d(LOG_TAG, "Could not find stations array");
+			Log.e(LOG_TAG, "Could not find stations array");
 		}
 		// setup and array to hold each station object
 		stationsArray = new StationInfo[JSONStationsArray.length()];
@@ -227,7 +165,7 @@ public class JsonWorker {
 				Log.d(LOG_TAG, "21. id= " + JSONStationsArray.getJSONObject(i).getInt("id")+"");
 				
 			} catch (JSONException e) {
-				Log.d(LOG_TAG, "Could not parse station data");
+				Log.e(LOG_TAG, "Could not parse station data");
 			}
 			//add station with full info to array
 			stationsArray[i] = station;
