@@ -14,17 +14,19 @@ import android.util.Log;
  * JSONWorker Class- Gets JSON data from URL and parses it into an array of Stations, with each station populated with information for that station.
  */
 public class JSONWorker {
+
+	//***I found that Xml and Json files are compressed by gzip, but not CSV files.**
+	
+	
 	//GET http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.format?parameters
 	//final URL format = baseURL + dataType + apiKeyParameter + fuelTypeParameter + status code = E == Open Stations Only
 	private String baseURL = "http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=f46ab87903614bc4dc864b057bc0fb543d197900&fuel_type=ELEC&status=E";       
+	
 	
 	// location and any other params need "&" before parameter 
 	private String location ="&location=";				//REQUIRES parameter (Longitude AND Latitude)  or free form distance 
 	private String latitude ="&latitude=";
 	private String longitude ="&longitude=";
-	private JSONObject MainJSONObject;
-	static final String LOG_TAG = "JSON";
-	StationInfo[] stationsArray;
 	
 	//using sample JSON String below to test with, had to add escapes (/) before each (") Retrieved from site using URL below with required Parameter Location=27607
 	//http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=f46ab87903614bc4dc864b057bc0fb543d197900&status=E&limit=2&fuel_type=ELEC&location=27607
@@ -39,16 +41,15 @@ public class JSONWorker {
 			"- McKimmon Center and Solar House\",station_phone: \"503-892-7345\",status_code: \"E\",street_address: \"1201 Gorman Ave\",zip: \"27606\",state: \"NC\",ng_fill_type_code: null,ng_psi: null," +
 			"ev_level1_evse_num: null,ev_level2_evse_num: 2,ev_dc_fast_num: null,ev_other_evse: null,ev_network: null,ev_network_web: null,id: 43324,updated_at: \"2012-03-14T17:33:35Z\",distance: 1.36443}]}";
 	
-	/**
-	 * Default constructor, mainly used for testing currently
-	 */
-	public JSONWorker(){
-		parseStationInfo();
-		
-	}
+	//other string to append to url depending on filters
+	
+	
+	private JSONObject MainJSONObject;
+	StationInfo[] stationsArray;
+	static final String LOG_TAG = "JSON";
 	
 	/**
-	 * Main Constructor - used to get station info, given a latitude and longitude
+	 * Main Constructor- used to get station info, given a latitude and longitude
 	 * @param latitude
 	 * @param longitude
 	 */
@@ -68,8 +69,8 @@ public class JSONWorker {
 	 */
 	public JSONWorker(String location){
 		this.location += location;
-		parseStationInfo();
 		
+		parseStationInfo();
 	}
 	
 	/**
@@ -79,6 +80,11 @@ public class JSONWorker {
 	public StationInfo[] getStationArray(){
 		return this.stationsArray;
 	}
+	
+	
+	
+	
+	
 	
 	
 	
