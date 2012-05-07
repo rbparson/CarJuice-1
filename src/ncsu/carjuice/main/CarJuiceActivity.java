@@ -50,7 +50,7 @@ public class CarJuiceActivity extends Activity {
         onSearchRequested();
         
         //call JSON worker to parse JSON String
-        JSONWorker worker = new JSONWorker();
+        JsonWorker worker = new JsonWorker();
     }
     
     

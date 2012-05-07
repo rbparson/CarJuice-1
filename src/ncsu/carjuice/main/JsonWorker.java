@@ -13,11 +13,8 @@ import android.util.Log;
  * @version 1.3
  * JSONWorker Class- Gets JSON data from URL and parses it into an array of Stations, with each station populated with information for that station.
  */
-public class JSONWorker {
+public class JsonWorker {
 
-	//***I found that Xml and Json files are compressed by gzip, but not CSV files.**
-	
-	
 	//GET http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.format?parameters
 	//final URL format = baseURL + dataType + apiKeyParameter + fuelTypeParameter + status code = E == Open Stations Only
 	private String baseURL = "http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=f46ab87903614bc4dc864b057bc0fb543d197900&fuel_type=ELEC&status=E";       
@@ -41,38 +38,47 @@ public class JSONWorker {
 			"- McKimmon Center and Solar House\",station_phone: \"503-892-7345\",status_code: \"E\",street_address: \"1201 Gorman Ave\",zip: \"27606\",state: \"NC\",ng_fill_type_code: null,ng_psi: null," +
 			"ev_level1_evse_num: null,ev_level2_evse_num: 2,ev_dc_fast_num: null,ev_other_evse: null,ev_network: null,ev_network_web: null,id: 43324,updated_at: \"2012-03-14T17:33:35Z\",distance: 1.36443}]}";
 	
-	//other string to append to url depending on filters
-	
 	
 	private JSONObject MainJSONObject;
 	StationInfo[] stationsArray;
 	static final String LOG_TAG = "JSON";
+	
+	
+	/**
+	 * Default constructor, mostly using for testing currently
+	 */
+	public JsonWorker() {
+		
+		parseStationInfo();
+		
+	}
 	
 	/**
 	 * Main Constructor- used to get station info, given a latitude and longitude
 	 * @param latitude
 	 * @param longitude
 	 */
-	public JSONWorker(Double latitude, Double longitude){
+	public JsonWorker(Double latitude, Double longitude){
 		this.latitude += latitude;
 		this.longitude += longitude;
 		
 		//getUrlCurrentLocation("34.234", "56.56");
 		
 		parseStationInfo();
-	
 	}
+	
 	
 	/**
 	 * Second Constructor - used to get Station info, given a free form string input of location by user
 	 * @param Location
 	 */
-	public JSONWorker(String location){
+	public JsonWorker(String location){
 		this.location += location;
 		
 		parseStationInfo();
 	}
 	
+
 	/**
 	 * Method to return a StationInfo Array, loaded up with all stations and their info
 	 * @return StationsInfo[]
@@ -82,38 +88,29 @@ public class JSONWorker {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 //---------------------------------------------Private Methods--------------------------------------------------------------------------------------------------------
 	// need to get URL, constructed from current user location, OR from user input	
-		/**
-		 * Method to get the needed URL for retrieving the correct JSON object, given a users Longitude and Latitude
-		 * @return Full URL String
-		 */
-		private String getUrlCurrentLocation(){
-			String fullURL = baseURL + latitude + longitude;
-			Log.d(LOG_TAG, "longitude is " + this.longitude + " and latitude is " + this.latitude);
-			Log.d(LOG_TAG, "Full URL = " + fullURL);
-			return fullURL;
-		}
+	/**
+	 * Method to get the needed URL for retrieving the correct JSON object, given a users Longitude and Latitude
+	 * @return Full URL String
+	 */
+	private String getUrlCurrentLocation(){
+		String fullURL = baseURL + latitude + longitude;
+		Log.d(LOG_TAG, "longitude is " + this.longitude + " and latitude is " + this.latitude);
+		Log.d(LOG_TAG, "Full URL = " + fullURL);
+		return fullURL;
+	}
 		
-		/**
-		 * Method to get the needed URL used to retrieve the JSON object, given a free form Location string from user input
-		 * @return Full URL String
-		 */
-		private String getUrlOtherLocation(){
-			String fullURL = baseURL + location;
-			Log.d(LOG_TAG, "Location input by user " + location);
-			Log.d(LOG_TAG, "Full URL = " + fullURL);
-			return fullURL;
-			
-		}
+	/**
+	 * Method to get the needed URL used to retrieve the JSON object, given a free form Location string from user input
+	 * @return Full URL String
+	 */
+	private String getUrlOtherLocation(){
+		String fullURL = baseURL + location;
+		Log.d(LOG_TAG, "Location input by user " + location);
+		Log.d(LOG_TAG, "Full URL = " + fullURL);
+		return fullURL;
+	}
 	
 	//using JSON string from http request below to test
 	//http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=f46ab87903614bc4dc864b057bc0fb543d197900&status=E&limit=2&fuel_type=ELEC&location=27607
