@@ -22,8 +22,27 @@ public class ParseJaSON {
 	private String location;
 	private String latitude;
 	private String longitude;
-		
 	
+	/**
+	 * temp string for test parsing
+	 */
+	private String jsonString ="{latitude: 35.8019142,longitude: -78.6875364,precision: {name: \"postal_code\",types: [\"postal_code\"],value: 5},station_locator_url: " +
+			"\"http://www.afdc.energy.gov/afdc/locator/stations/\",total_results: 23,offset: 0,fuel_stations: [{access_days_time: \"24 hours daily\",bd_blends: null,cards_accepted: null,city: " +
+			"\"Raleigh\",date_last_confirmed: \"2012-02-29\",expected_date: null,fuel_type_code: \"ELEC\",geocode_status: \"200-8\",groups_with_access_code: \"Public - see hours\",intersection_directions:" +
+			" null,latitude: 35.7828039,longitude: -78.683243,open_date: \"2012-02-01\",owner_type_code: \"SG\",plus4: null,station_name: \"North Carolina State University - Joyner Visitor Center\",station_phone:" +
+			" \"919-513-1200\",status_code: \"E\",street_address: \"1210 Varsity Dr\",zip: \"27606\",state: \"NC\",ng_fill_type_code: null,ng_psi: null,ev_level1_evse_num: 1,ev_level2_evse_num: 1,ev_dc_fast_num:" +
+			" null,ev_other_evse: null,ev_network: null,ev_network_web: null,id: 43880,updated_at: null,distance: 1.33944},{access_days_time: \"24 hours daily\",bd_blends: null,cards_accepted: null,city:" +
+			" \"Raleigh\",date_last_confirmed: \"2012-02-29\",expected_date: null,fuel_type_code: \"ELEC\",geocode_status: \"GPS\",groups_with_access_code: \"Public - see hours\",intersection_directions: " +
+			"\"Gorman Ave between Varsity and western\",latitude: 35.782144,longitude: -78.686442,open_date: \"2012-02-20\",owner_type_code: \"SG\",plus4: null,station_name: \"North Carolina State University " +
+			"- McKimmon Center and Solar House\",station_phone: \"503-892-7345\",status_code: \"E\",street_address: \"1201 Gorman Ave\",zip: \"27606\",state: \"NC\",ng_fill_type_code: null,ng_psi: null," +
+			"ev_level1_evse_num: null,ev_level2_evse_num: 2,ev_dc_fast_num: null,ev_other_evse: null,ev_network: null,ev_network_web: null,id: 43324,updated_at: \"2012-03-14T17:33:35Z\",distance: 1.36443}]}";
+		
+	//empty constructor used for testing
+	public ParseJaSON(){
+		
+		parseStationInfo();
+		
+	}
 	/**
 	 * Default constructor, mostly using for testing currently
 	 */
@@ -47,23 +66,28 @@ public class ParseJaSON {
 	/**
 	 * Method to parse JSON Object and populate StationInfo Array with Stations and details for each
 	 */
-	private void parseStationInfo(JSONObject mainJSONObject){ 
+	private void parseStationInfo(){ 									//	JSONObject mainJSONObject
+		
+		/**
+		 * temp commented out to use string instead of JSON object
 		if(mainJSONObject != null && !mainJSONObject.equals("")){
 			this.mainJSONObject = mainJSONObject;
 		}
 		else{
 			Log.e(LOG_TAG, "JSON object was null or empty string");
 		}
+		*/
 		JSONArray JSONStationsArray = null;
 		StationInfo station = null;
 		
-		/**
+		//temp code uncommented to make sample array from sample string instead of JSON object
+		///**
 		try {
-			MainJSONObject = new JSONObject(jsonString);
+			mainJSONObject = new JSONObject(jsonString);
 		} catch (JSONException e) {
 			Log.e(LOG_TAG, "Could not find MainJSONobject");
 		}
-		*/
+		//*/
 		
 		try {
 			JSONStationsArray = mainJSONObject.getJSONArray("fuel_stations");
