@@ -44,11 +44,16 @@ public class CarJuiceActivity extends Activity {
 
         
         //Open the search dialogue on app-launch
-        
         onSearchRequested();
         
-        //call JSON worker to parse JSON String
-        //ParseJaSON JSONParser = new ParseJaSON();
+        
+        //****************parse json using below code****************
+        //call ParseJaSON to populate stations array
+        //then use JSONParser.getStationArray() return the array
+        ParseJaSON JSONParser = new ParseJaSON();
+       // StationInfo[] stationsArray= JSONParser.getStationArray();
+        
+        
     }
 
     //Message sent by "Locate" button. Sends an intent to the listview activity

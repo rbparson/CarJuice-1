@@ -61,14 +61,6 @@ public class GetJaSON {
 		this.longitude = longitude;
 		
 	}
-	/**
-	 * Constructor
-	 * @param location
-	 */
-	public GetJaSON(String location){
-		this.location = location;		
-	}
-	
 
 	public String getURLCurrentLocation(Double latitude, Double longitude){
 		this.latitude += latitude;
