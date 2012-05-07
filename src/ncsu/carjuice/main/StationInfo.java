@@ -14,18 +14,17 @@ public class StationInfo {
 	private String city;							//The city of the station's location.
 	private String state;							//The two character U.S. state or Canadian province code of the station's location.
 	private String zip;								//The ZIP code (postal code) of the station's location.
-	private String plus4;							//The plus-4 portion of the station's ZIP code (U.S. ZIP codes only).
 	private String phoneNumber;						//The phone number of the station.
-	
-	//might remove these- only get currently open stations
-	private String statusCode;						//E	= The station is open, P = Planned: The station is not yet open or the station is temporarily out of service. See the "expectedDate" for an anticipated open date.
-	private String expectedDate;					//For planned stations, the date the station is expected to open or reopen
-	
-	
 	private String groupsWithAccess;				//A description of who is allowed to access the station and other station access information
 	private String operationHours;					//Hours of operation for the station.
 	private String cardsAccepted;					//A space-separated list of payment methods accepted. Possible payment methods: A, D, M, V, Cash, Checks, CFN, CleanEnergy, FuelMan, GasCard, PHH, Voyager, Wright_Exp 
-	private String ownerType;						//A space-separated list of owner codes. P=Privately owned, T=Utility owned, FG=Federal government owned, LG=Local government owned, SG=State government owned.
+	private String ownerType;						//A space-separated list of owner codes. 
+													/**
+													 * P=Privately owned
+													 * T=Utility owned
+													 * FG=Federal government owned
+													 * LG=Local government owned, SG=State government owned.
+													 */
 	private String chargingNetwork;					//the name of the EVSE network, if applicable.
 	private String chargingNetworkWebsite;			//the EVSE network Web site, if applicable.
 	private String geocodeStatus;					//A rating indicating the approximate accuracy of the latitude and longitude for the station's address, given as code values as described below:
@@ -43,14 +42,14 @@ public class StationInfo {
 													 * 200-0	 Unknown accuracy.
 													 */
 													
-	private double latitude;						//The latitude of the station's address Range: -90 to 90
-	private double longitude;						//The longitude of the station's address Range -180 to 180
-	private double distance;						//The distance, in miles, from the given location and this station.
+	private String latitude;						//The latitude of the station's address Range: -90 to 90
+	private String longitude;						//The longitude of the station's address Range -180 to 180
+	private String distance;						//The distance, in miles, from the given location and this station.
 	
-	private int numLevel1Chargers;					//The number of Level 1 EVSE (standard 110V outlet).
-	private int numLevel2Chargers;					//The number of Level 2 EVSE (J1772 connector).
-	private int numDcFastChargers;					//The number of DC Fast Chargers
-	private int stationId;							//A unique identifier for this specific station.
+	private String numLevel1Chargers;				//The number of Level 1 EVSE (standard 110V outlet).
+	private String numLevel2Chargers;				//The number of Level 2 EVSE (J1772 connector).
+	private String numDcFastChargers;				//The number of DC Fast Chargers
+	private String stationId;						//A unique identifier for this specific station.
 	
 	
 	
@@ -98,32 +97,12 @@ public class StationInfo {
 		return zip;
 	}
 	
-	/**
-	 * @return the plus4
-	 */
-	public String getPlus4() {
-		return plus4;
-	}
 
 	/**
 	 * @return the phoneNumber
 	 */
 	public String getPhoneNumber() {
 		return phoneNumber;
-	}
-	
-	/**
-	 * @return the statusCode
-	 */
-	public String getStatusCode() {
-		return statusCode;
-	}
-	
-	/**
-	 * @return the expectedDate
-	 */
-	public String getExpectedDate() {
-		return expectedDate;
 	}
 	
 	/**
@@ -178,49 +157,49 @@ public class StationInfo {
 	/**
 	 * @return the latitude
 	 */
-	public double getLatitude() {
+	public String getLatitude() {
 		return latitude;
 	}
 	
 	/**
 	 * @return the longitude
 	 */
-	public double getLongitude() {
+	public String getLongitude() {
 		return longitude;
 	}
 	
 	/**
 	 * @return the distance
 	 */
-	public double getDistance() {
+	public String getDistance() {
 		return distance;
 	}
 	
 	/**
 	 * @return the numLevel1Chargers
 	 */
-	public int getNumLevel1Chargers() {
+	public String getNumLevel1Chargers() {
 		return numLevel1Chargers;
 	}
 	
 	/**
 	 * @return the numLevel2Chargers
 	 */
-	public int getNumLevel2Chargers() {
+	public String getNumLevel2Chargers() {
 		return numLevel2Chargers;
 	}
 	
 	/**
 	 * @return the numDcFastChargers
 	 */
-	public int getNumDcFastChargers() {
+	public String getNumDcFastChargers() {
 		return numDcFastChargers;
 	}
 	
 	/**
 	 * @return the stationId
 	 */
-	public int getStationId() {
+	public String getStationId() {
 		return stationId;
 	}
 	
@@ -267,33 +246,12 @@ public class StationInfo {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	
-	/**
-	 * @param plus4 the plus4 to set
-	 */
-	public void setPlus4(String plus4) {
-		this.plus4 = plus4;
-	}
 
 	/**
 	 * @param phoneNumber the phoneNumber to set
 	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-	
-	/**
-	 * @param statusCode the statusCode to set
-	 */
-	public void setStatusCode(String statusCode) {
-		this.statusCode = statusCode;
-	}
-	
-	/**
-	 * @param expectedDate the expectedDate to set
-	 */
-	public void setExpectedDate(String expectedDate) {
-		this.expectedDate = expectedDate;
 	}
 	
 	/**
@@ -348,49 +306,49 @@ public class StationInfo {
 	/**
 	 * @param latitude the latitude to set
 	 */
-	public void setLatitude(double latitude) {
+	public void setLatitude(String latitude) {
 		this.latitude = latitude;
 	}
 	
 	/**
 	 * @param longitude the longitude to set
 	 */
-	public void setLongitude(double longitude) {
+	public void setLongitude(String longitude) {
 		this.longitude = longitude;
 	}
 	
 	/**
 	 * @param distance the distance to set
 	 */
-	public void setDistance(double distance) {
+	public void setDistance(String distance) {
 		this.distance = distance;
 	}
 	
 	/**
 	 * @param numLevel1Chargers the numLevel1Chargers to set
 	 */
-	public void setNumLevel1Chargers(int numLevel1Chargers) {
+	public void setNumLevel1Chargers(String numLevel1Chargers) {
 		this.numLevel1Chargers = numLevel1Chargers;
 	}
 	
 	/**
 	 * @param numLevel2Chargers the numLevel2Chargers to set
 	 */
-	public void setNumLevel2Chargers(int numLevel2Chargers) {
+	public void setNumLevel2Chargers(String numLevel2Chargers) {
 		this.numLevel2Chargers = numLevel2Chargers;
 	}
 	
 	/**
 	 * @param numDcFastChargers the numDcFastChargers to set
 	 */
-	public void setNumDcFastChargers(int numDcFastChargers) {
+	public void setNumDcFastChargers(String numDcFastChargers) {
 		this.numDcFastChargers = numDcFastChargers;
 	}
 	
 	/**
 	 * @param stationId the stationId to set
 	 */
-	public void setStationId(int stationId) {
+	public void setStationId(String stationId) {
 		this.stationId = stationId;
 	}
 	
