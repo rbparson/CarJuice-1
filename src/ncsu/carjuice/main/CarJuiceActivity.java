@@ -49,10 +49,8 @@ public class CarJuiceActivity extends Activity {
         onSearchRequested();
         
         
-        //****************parse json using below code****************
-        //call ParseJaSON to populate stations array
-        //then use JSONParser.getStationArray() return the array
-        ParseJaSON JSONParser = new ParseJaSON();
+        
+        GetJaSON JSONParser = new GetJaSON();
        // StationInfo[] stationsArray= JSONParser.getStationArray();
         
         
