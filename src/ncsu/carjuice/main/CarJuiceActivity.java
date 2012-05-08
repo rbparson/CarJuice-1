@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-
 
 public class CarJuiceActivity extends Activity {
 	
@@ -55,8 +53,7 @@ public class CarJuiceActivity extends Activity {
         
         
     }
-    
-    
+
     //Message sent by "Locate" button. Sends an intent to the listview activity
     public void sendMessage(View view) {
     	

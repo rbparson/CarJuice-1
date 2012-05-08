@@ -1,7 +1,10 @@
 package ncsu.carjuice.main;
 
+import java.util.ArrayList;
+
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,15 +19,28 @@ import android.widget.TextView;
 
 public class ResultsListActivity extends ListActivity {
 	
+	private ProgressDialog m_ProgressDialog = null; 
+    private ArrayList<StationInfo> stationArray = null;
+    private OrderAdapter stationAdapter;
+    private Runnable viewOrders;
+	
 	final Context context = this;	
 	
+	//Create instance of the parser
+	ParseJaSON parser = new ParseJaSON();
+	
+	//Create and populate an array of StationInfo objects
+	stationArray = parser.getStationArray();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
 	  super.onCreate(savedInstanceState);
-
-	  setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, STATIONS));
+	  
+	  setListAdapter(new ArrayAdapter<StationInfo>(this, R.layout.list_item, stationArray));
+	  
+	  //setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, stationArray));
+	  
 	  
 	  // Get intent and any data it may contain
 	  Intent intent = getIntent();
