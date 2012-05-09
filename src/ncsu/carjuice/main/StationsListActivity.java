@@ -173,7 +173,6 @@ public class StationsListActivity extends Activity {
         // Click event for single list row
         list.setOnItemClickListener(new OnItemClickListener() {
  
-            @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
             	// custom dialog
 				final Dialog dialog = new Dialog(context);
