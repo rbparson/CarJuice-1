@@ -2,8 +2,9 @@
 <resources>
 
     <string name="app_name">CarJuice</string>
-    <string name="edit_message">Enter a message</string>
-    <string name="button_locate">Locate</string>
+    <string name="edit_address">Enter an address, zip code, or state</string>
+    <string name="search">Search</string>
+     <string name="button_locate">Locate</string>
     <string name="search_hint">Enter an address</string>
     <string name="app_label">Some Text</string>
 

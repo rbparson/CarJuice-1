@@ -1,16 +1,15 @@
 package ncsu.carjuice.main;
 
-import ncsu.carjuice.main.GetLocation.LocationResult;
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 public class CarJuiceActivity extends Activity {
 	
-	//Can add things like strings to an intent and send those along too
-	//public final static String EXTRA_MESSAGE = "ncsu.carjuice.main.MESSAGE";
+	//Creating the search query string to send along bundled with the intent to list view
+	public final static String SEARCH_QUERY = "ncsu.carjuice.main.MESSAGE";
 
     /** Called when the activity is first created. */
    	
@@ -40,11 +39,7 @@ public class CarJuiceActivity extends Activity {
         myLocation.getLocation(this, locationResult);        
         
 //----------------------------------end get location--------------------        
- */       
-
-        
-        //Open the search dialogue on app-launch
-        onSearchRequested();
+ */
         
         
         
@@ -60,15 +55,14 @@ public class CarJuiceActivity extends Activity {
         // Do something in response to button
     	Intent intent = new Intent(this, ResultsListActivity.class);
     	
-    	/*This is code for grabbing the text out of a text box on the main page,
-    	 * not currently in use but in case we need to go back to that route...
-    	 * 
-    	EditText editText = (EditText) findViewById(R.id.edit_message);
+    	
+    	EditText editText = (EditText) findViewById(R.id.edit_address);
     	String message = editText.getText().toString();
-    	intent.putExtra(EXTRA_MESSAGE, message);
-    	*/
+    	intent.putExtra(SEARCH_QUERY, message);
+    	
     	
     	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
+    	//Intent also carries with it the SEARCH_QUERY
     	startActivity(intent);
     	//TestJSON test = new TestJSON();
     }
