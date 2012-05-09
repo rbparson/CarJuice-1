@@ -1,13 +1,30 @@
 package ncsu.carjuice.main;
 
 import ncsu.carjuice.main.GetLocation.LocationResult;
+import ncsu.carjuice.main.ListViewAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
+
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
-public class CarJuiceActivity extends Activity {
+public class MainActivity extends Activity {
+	
+	
 	
 	//Can add things like strings to an intent and send those along too
 	//public final static String EXTRA_MESSAGE = "ncsu.carjuice.main.MESSAGE";
@@ -42,14 +59,10 @@ public class CarJuiceActivity extends Activity {
 //----------------------------------end get location--------------------        
  */       
 
-        
+        Intent intent = new Intent(this, ResultsListActivity.class);
+        startActivity(intent);
         //Open the search dialogue on app-launch
-        onSearchRequested();
-        
-        
-        
-        GetJaSON JSONParser = new GetJaSON();
-       // StationInfo[] stationsArray= JSONParser.getStationArray();
+        //onSearchRequested();
         
         
     }
@@ -70,7 +83,6 @@ public class CarJuiceActivity extends Activity {
     	
     	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
     	startActivity(intent);
-    	//TestJSON test = new TestJSON();
     }
 
 }
