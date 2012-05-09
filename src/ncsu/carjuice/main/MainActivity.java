@@ -1,22 +1,14 @@
 package ncsu.carjuice.main;
 
-
-import ncsu.carjuice.main.GetLocation.LocationResult;
-import ncsu.carjuice.main.ListViewAdapter;
-
-
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-
 public class MainActivity extends Activity {
-	
-	
 	
 	//Creating the search query string to send along bundled with the intent to list view
 	public final static String SEARCH_QUERY = "ncsu.carjuice.main.MESSAGE";
@@ -49,43 +41,54 @@ public class MainActivity extends Activity {
         myLocation.getLocation(this, locationResult);        
         
 //----------------------------------end get location--------------------        
-
-        
-        
-        
-        GetJaSON JSONParser = new GetJaSON();
-       // StationInfo[] stationsArray= JSONParser.getStationArray();
-
-
-        
-   
-
  */       
-
-        
-        //startActivity(new Intent("ncsu.carjuice.ListViewAdapter"));
-        //Open the search dialogue on app-launch
-        //onSearchRequested();
-
-        
         
     }
-
+    
     //Message sent by "Locate" button. Sends an intent to the listview activity
-    public void sendMessage(View view) {
+    public void sendLocation(View view) {
     	
         // Do something in response to button
-    	Intent intent = new Intent(this, ResultsListActivity.class);
-    	
-    	
-    	//EditText editText = (EditText) findViewById(R.id.edit_address);
-    	//String message = editText.getText().toString();
-    	//intent.putExtra(SEARCH_QUERY, message);
-    	
+    	Intent intent = new Intent(this, StationsListActivity.class);
     	
     	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
     	//Intent also carries with it the SEARCH_QUERY
     	startActivity(intent);
+    }    
+
+    //Message sent by Search button. Sends an intent to the listview activity
+    public void sendQuery(View view) {
+    	
+        // Do something in response to button
+    	Intent intent = new Intent(this, StationsListActivity.class);
+    	
+    	
+    	EditText editText = (EditText) findViewById(R.id.edit_address);
+    	String message = editText.getText().toString();
+    	
+    	if(message.length()==0)
+    	{
+    		final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+    		alertDialog.setTitle("Please Enter Address");
+    		alertDialog.setMessage("Enter a complete address, a city, state, or zip");
+    		
+    		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+    		      public void onClick(DialogInterface dialog, int which) {
+    		 
+    		       alertDialog.dismiss();
+    		 
+    		    } });
+    		
+    		alertDialog.show();
+    		
+    	}
+    	else{
+    		intent.putExtra(SEARCH_QUERY, message);
+    		//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
+        	//Intent also carries with it the SEARCH_QUERY
+        	startActivity(intent);
+    	}
+    	
     }
 
 }
