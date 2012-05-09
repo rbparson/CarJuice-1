@@ -1,6 +1,8 @@
 package ncsu.carjuice.main;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -39,14 +41,23 @@ public class MainActivity extends Activity {
         myLocation.getLocation(this, locationResult);        
         
 //----------------------------------end get location--------------------        
- */
-        
-                
+ */       
         
     }
-
+    
     //Message sent by "Locate" button. Sends an intent to the listview activity
-    public void sendMessage(View view) {
+    public void sendLocation(View view) {
+    	
+        // Do something in response to button
+    	Intent intent = new Intent(this, StationsListActivity.class);
+    	
+    	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
+    	//Intent also carries with it the SEARCH_QUERY
+    	startActivity(intent);
+    }    
+
+    //Message sent by Search button. Sends an intent to the listview activity
+    public void sendQuery(View view) {
     	
         // Do something in response to button
     	Intent intent = new Intent(this, StationsListActivity.class);
@@ -54,13 +65,30 @@ public class MainActivity extends Activity {
     	
     	EditText editText = (EditText) findViewById(R.id.edit_address);
     	String message = editText.getText().toString();
-    	intent.putExtra(SEARCH_QUERY, message);
     	
+    	if(message.length()==0)
+    	{
+    		final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+    		alertDialog.setTitle("Please Enter Address");
+    		alertDialog.setMessage("Enter a complete address, a city, state, or zip");
+    		
+    		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+    		      public void onClick(DialogInterface dialog, int which) {
+    		 
+    		       alertDialog.dismiss();
+    		 
+    		    } });
+    		
+    		alertDialog.show();
+    		
+    	}
+    	else{
+    		intent.putExtra(SEARCH_QUERY, message);
+    		//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
+        	//Intent also carries with it the SEARCH_QUERY
+        	startActivity(intent);
+    	}
     	
-    	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
-    	//Intent also carries with it the SEARCH_QUERY
-    	startActivity(intent);
-    	//TestJSON test = new TestJSON();
     }
 
 }

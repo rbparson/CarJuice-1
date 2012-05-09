@@ -86,7 +86,9 @@ public class StationsListActivity extends Activity {
 		//using temp params
 		JSONObject = (new GetJSONObject("27607", 10).returnJSONObject() );
 		Log.d(LOG_TAG, "JSON object set");
+		
 		JSONArray JSONStationsArray = null;
+		
 		if(JSONObject != null && !JSONObject.equals("")){
 			try {
 				JSONStationsArray = JSONObject.getJSONArray("fuel_stations");
@@ -164,7 +166,7 @@ public class StationsListActivity extends Activity {
 				}
 			} //end if loop
 			
-			list=(ListView)findViewById(R.id.list);
+	    list=(ListView)findViewById(R.id.list);
 		 
         // Getting adapter by passing JSON data ArrayList
         adapter = new ListViewAdapter(this, stationsList);

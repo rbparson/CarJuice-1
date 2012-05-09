@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="103dp"
-        android:onClick="sendMessage"
+        android:onClick="sendLocation"
         android:text="@string/button_locate" />
 
     <Button
@@ -21,7 +21,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/edit_address"
-        android:onClick="sendMessage"
+        android:onClick="sendQuery"
         android:text="@string/search" />
 
     <EditText
