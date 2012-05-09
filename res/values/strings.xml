@@ -4,8 +4,10 @@
     <string name="app_name">CarJuice</string>
     <string name="edit_address">Enter an address, zip code, or state</string>
     <string name="search">Search</string>
-     <string name="button_locate">Locate</string>
+    <string name="button_locate">Locate</string>
     <string name="search_hint">Enter an address</string>
     <string name="app_label">Some Text</string>
+    <string name="dialog_back">Back</string>
+    <string name="map_it">Map It</string>
 
 </resources>

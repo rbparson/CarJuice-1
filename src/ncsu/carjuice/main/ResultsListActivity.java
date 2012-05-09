@@ -42,14 +42,61 @@ public class ResultsListActivity extends ListActivity {
 			    	// custom dialog
 					final Dialog dialog = new Dialog(context);
 					dialog.setContentView(R.layout.station_details);
+					
+					//Set the title, probably station name?
 					dialog.setTitle("Title...");
 					
-					// set the custom dialog components - text, image and button
-					TextView text = (TextView) dialog.findViewById(R.id.text);
-					text.setText("Android custom dialog example!");
+					TextView address = (TextView) dialog.findViewById(R.id.address);
+					address.setText("12 Shepherd Drive, Raleigh, NC 27607");
 					
-					Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+					TextView distance = (TextView) dialog.findViewById(R.id.distance);
+					distance.setText("Distance: 6.9 Miles");
 					
+					TextView intersection = (TextView) dialog.findViewById(R.id.intersection);
+					intersection.setText("First right after intersection of Hillsborough St. and Dixie Trail");
+					
+					//Button to send to maps view
+					Button mapButton = (Button) dialog.findViewById(R.id.mapButton);
+					// if button is clicked, close the custom dialog
+					mapButton.setOnClickListener(new OnClickListener() 
+					{
+						public void onClick(View v) 
+						{
+							//Send to map View here
+						}
+					});
+					
+					TextView level1Chargers = (TextView) dialog.findViewById(R.id.level1Chargers);
+					level1Chargers.setText("1 Level 1 Charger");
+					
+					TextView level2Chargers = (TextView) dialog.findViewById(R.id.level2Chargers);
+					level2Chargers.setText("1 Level 2 Charger");
+					
+					TextView dcFastChargers = (TextView) dialog.findViewById(R.id.dcFastChargers);
+					dcFastChargers.setText("1 DC Fast Charger");
+					
+					//Need to parse the codes to words
+					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
+					ownerType.setText("Owner: Privately Owned");
+					
+					//Should we just make this text a link to the website?
+					TextView network = (TextView) dialog.findViewById(R.id.network);
+					network.setText("Network: Sharepoint Network");
+					
+					TextView groupsWithAccess = (TextView) dialog.findViewById(R.id.groupsWithAccess);
+					groupsWithAccess.setText("All groups have access");
+					
+					TextView cardsAccepted = (TextView) dialog.findViewById(R.id.cardsAccepted);
+					cardsAccepted.setText("Payment Methods: All major credit cards accepted");
+					
+					TextView telephone = (TextView) dialog.findViewById(R.id.telephone);
+					telephone.setText("1-800-123-4567");
+					
+					
+					
+					
+					
+					Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);			
 					// if button is clicked, close the custom dialog
 					dialogButton.setOnClickListener(new OnClickListener() 
 					{
@@ -59,6 +106,7 @@ public class ResultsListActivity extends ListActivity {
 						}
 					});
 
+					//Display the station details dialog
 					dialog.show();
 			      
 		    	}

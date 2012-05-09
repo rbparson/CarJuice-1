@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
- <!--  a change -->
+
     <ImageView
         android:id="@+id/image"
         android:layout_width="wrap_content"
@@ -10,20 +10,125 @@
         android:layout_marginRight="5dp" />
  
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/address"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
         android:textColor="#FFF" 
-        android:layout_toRightOf="@+id/image"/>/>
- 
-     <Button
-        android:id="@+id/dialogButtonOK"
-        android:layout_width="100px"
+        android:layout_below="@+id/image"/>
+    
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text=" Ok "
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_below="@+id/image"
-        />
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
+        android:textColor="#FFF" 
+        android:layout_below="@+id/address"/>
+    
+    <TextView
+        android:id="@+id/intersection"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
+        android:textColor="#FFF" 
+        android:layout_below="@+id/distance"/> 
+     <Button
+     	android:id="@+id/mapButton"
+     	android:layout_width="fill_parent"
+     	android:layout_height="wrap_content"
+     	android:layout_alignParentLeft="true"
+     	android:layout_alignParentRight="true"
+     	android:layout_marginRight="40dp"
+ 	    android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="40dp"
+     	android:layout_below="@+id/intersection"
+     	android:text="@string/map_it" />
+    
+    <TextView
+        android:id="@+id/level1Chargers"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
+        android:textColor="#FFF" 
+        android:layout_below="@+id/mapButton"/>
+    
+    <TextView
+        android:id="@+id/level2Chargers"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
+        android:textColor="#FFF" 
+        android:layout_below="@+id/level1Chargers"/>
+    
+    <TextView
+        android:id="@+id/dcFastChargers"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
+        android:textColor="#FFF" 
+        android:layout_below="@+id/level2Chargers"/>
+    
+    <TextView
+        android:id="@+id/ownerType"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
+        android:textColor="#FFF" 
+        android:layout_below="@+id/dcFastChargers"/>
+    
+    <TextView
+        android:id="@+id/network"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
+        android:textColor="#FFF" 
+        android:layout_below="@+id/ownerType"/>
+
+    
+    <TextView
+        android:id="@+id/groupsWithAccess"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
+        android:textColor="#FFF" 
+        android:layout_below="@+id/network"/>
+    
+    <TextView
+        android:id="@+id/cardsAccepted"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
+        android:textColor="#FFF" 
+        android:layout_below="@+id/groupsWithAccess"/>
+    
+    <TextView
+        android:id="@+id/telephone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+ 	    android:layout_marginLeft="13dp"
+        android:textColor="#FFF" 
+        android:layout_below="@+id/cardsAccepted"/>
+
+ 	<Button
+ 	    android:id="@+id/dialogButtonOK"
+ 	    android:layout_width="fill_parent"
+ 	    android:layout_height="65dp"
+ 	    android:layout_alignParentBottom="true"
+ 	    android:layout_alignParentLeft="true"
+ 	    android:layout_marginRight="3dp"
+ 	    android:layout_marginBottom="3dp"
+ 	    android:layout_marginLeft="3dp"
+ 	    android:text="@string/dialog_back" />
  
 </RelativeLayout>
