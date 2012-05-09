@@ -79,16 +79,13 @@ public class StationsListActivity extends Activity {
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		// hides the title bar
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
 		setContentView(R.layout.list_view);
 	
 		ArrayList<HashMap<String, String>> stationsList = new ArrayList<HashMap<String, String>>();
 		
 		//using temp params
 		JSONObject = (new GetJSONObject("27607", 10).returnJSONObject() );
+		Log.d(LOG_TAG, "JSON object set");
 		JSONArray JSONStationsArray = null;
 		if(JSONObject != null && !JSONObject.equals("")){
 			try {
@@ -165,16 +162,97 @@ public class StationsListActivity extends Activity {
 				} catch (JSONException e) {
 					Log.e(LOG_TAG, "Could not parse station data");
 				}
-			} //end for loop
+			} //end if loop
 			
-			
-			
-		} //end if
+			list=(ListView)findViewById(R.id.list);
+		 
+        // Getting adapter by passing JSON data ArrayList
+        adapter = new ListViewAdapter(this, stationsList);
+        list.setAdapter(adapter);
+ 
+        // Click event for single list row
+        list.setOnItemClickListener(new OnItemClickListener() {
+ 
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+            	// custom dialog
+				final Dialog dialog = new Dialog(context);
+				dialog.setContentView(R.layout.station_details);
+				
+				//Set the title, probably station name?
+				dialog.setTitle("Title...");
+				
+				TextView address = (TextView) dialog.findViewById(R.id.address);
+				address.setText("12 Shepherd Drive, Raleigh, NC 27607");
+				
+				TextView distance = (TextView) dialog.findViewById(R.id.distance);
+				distance.setText("Distance: 6.9 Miles");
+				
+				TextView intersection = (TextView) dialog.findViewById(R.id.intersection);
+				intersection.setText("First right after intersection of Hillsborough St. and Dixie Trail");
+				
+				//Button to send to maps view
+				Button mapButton = (Button) dialog.findViewById(R.id.mapButton);
+				// if button is clicked, close the custom dialog
+				mapButton.setOnClickListener(new OnClickListener() 
+				{
+					public void onClick(View v) 
+					{
+						//Send to map View here
+					}
+				});
+				
+				TextView level1Chargers = (TextView) dialog.findViewById(R.id.level1Chargers);
+				level1Chargers.setText("1 Level 1 Charger");
+				
+				TextView level2Chargers = (TextView) dialog.findViewById(R.id.level2Chargers);
+				level2Chargers.setText("1 Level 2 Charger");
+				
+				TextView dcFastChargers = (TextView) dialog.findViewById(R.id.dcFastChargers);
+				dcFastChargers.setText("1 DC Fast Charger");
+				
+				//Need to parse the codes to words
+				TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
+				ownerType.setText("Owner: Privately Owned");
+				
+				//Should we just make this text a link to the website?
+				TextView network = (TextView) dialog.findViewById(R.id.network);
+				network.setText("Network: Sharepoint Network");
+				
+				TextView groupsWithAccess = (TextView) dialog.findViewById(R.id.groupsWithAccess);
+				groupsWithAccess.setText("All groups have access");
+				
+				TextView cardsAccepted = (TextView) dialog.findViewById(R.id.cardsAccepted);
+				cardsAccepted.setText("Payment Methods: All major credit cards accepted");
+				
+				TextView telephone = (TextView) dialog.findViewById(R.id.telephone);
+				telephone.setText("1-800-123-4567");
+
+				Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);			
+				// if button is clicked, close the custom dialog
+				dialogButton.setOnClickListener(new OnClickListener() 
+				{
+					public void onClick(View v) 
+					{
+						dialog.dismiss();
+					}
+				});
+
+				//Display the station details dialog
+				dialog.show();
+		      
+	    	} //end onClick
+	  });
+
+	} //end if loop
 		else{
 			Log.e(LOG_TAG, "JSON object was null or empty string");
 		}
 		
-    } //end method onCreate
-	
-} //end class
+    } //end onCreate()
+} //end class    
+    
+    
+
+
 	

@@ -62,6 +62,7 @@ public class ResultsListActivity extends ListActivity {
 					{
 						public void onClick(View v) 
 						{
+							//dialog.dismiss();
 							//Send to map View here
 						}
 					});

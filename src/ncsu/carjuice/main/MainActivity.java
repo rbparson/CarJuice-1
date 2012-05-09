@@ -62,8 +62,8 @@ public class MainActivity extends Activity {
 
  */       
 
-        Intent intent = new Intent(this, ResultsListActivity.class);
-        startActivity(intent);
+        
+        //startActivity(new Intent("ncsu.carjuice.ListViewAdapter"));
         //Open the search dialogue on app-launch
         //onSearchRequested();
 
@@ -78,9 +78,9 @@ public class MainActivity extends Activity {
     	Intent intent = new Intent(this, ResultsListActivity.class);
     	
     	
-    	EditText editText = (EditText) findViewById(R.id.edit_address);
-    	String message = editText.getText().toString();
-    	intent.putExtra(SEARCH_QUERY, message);
+    	//EditText editText = (EditText) findViewById(R.id.edit_address);
+    	//String message = editText.getText().toString();
+    	//intent.putExtra(SEARCH_QUERY, message);
     	
     	
     	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity

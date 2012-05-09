@@ -1,41 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:baselineAligned="true"
-    android:orientation="horizontal" >
-
-    <Button
-        android:layout_width="180dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+ 
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="125dp"
-        android:onClick="sendMessage"
-        android:text="@string/button_locate" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/edit_address"
-        android:layout_alignTop="@+id/edit_address"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/edit_address"
-        android:layout_marginLeft="5dp"
-        android:onClick="sendMessage"
-        android:text="@string/search" />
-
-    <EditText
-        android:id="@+id/edit_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:ems="10"
-        android:hint="@string/edit_address" >
-
-        <requestFocus />
-    </EditText>
-
-</RelativeLayout>
+        android:divider="#b5b5b5"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_selector" />
+ 
+</LinearLayout>
