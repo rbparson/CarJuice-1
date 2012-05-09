@@ -3,6 +3,8 @@
  */
 package ncsu.carjuice.main;
 
+import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,25 +12,19 @@ import org.json.JSONObject;
 import android.util.Log;
 /**
  * @author Jason Brown
- * @version 1.3
+ * @version 1.4
  * JSONWorker Class- Gets JSON data from URL and parses it into an array of Stations, with each station populated with information for that station.
  */
 public class ParseJaSON {
-
-
-	StationInfo[] stationsArray;
+	private ArrayList<StationInfo> stationsArrayList;
 	JSONObject mainJSONObject;
 	static final String LOG_TAG = "ParseJaSON";
-	private String location;
-	private String latitude;
-	private String longitude;
 	
-	
-		
+			
 	//empty constructor used for testing
-	public ParseJaSON(JSONObject mainJSONObject){
+	public ParseJaSON(JSONObject JSONObject){
 		
-		parseStationInfo(mainJSONObject);
+		parseStationInfo(JSONObject);
 		
 	}
 	
@@ -42,16 +38,14 @@ public class ParseJaSON {
 	
 	/**
 	 * Method to return a StationInfo Array, loaded up with all stations and their info
-	 * @return StationsInfo[]
+	 * @return ArrayList<StationInfo>
 	 */
-	public StationInfo[] getStationArray(){
-		return this.stationsArray;
+	public ArrayList<StationInfo> getStationArray(){
+		return this.stationsArrayList;
 	}
 	
 	
 //---------------------------------------------Private Methods--------------------------------------------------------------------------------------------------------
-	//using JSON string from http request below to test
-	//http://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=f46ab87903614bc4dc864b057bc0fb543d197900&status=E&limit=2&fuel_type=ELEC&location=27607
 	/**
 	 * Method to parse JSON Object and populate StationInfo Array with Stations and details for each
 	 */
@@ -65,24 +59,15 @@ public class ParseJaSON {
 		else{
 			Log.e(LOG_TAG, "JSON object was null or empty string");
 		}
-		
-		//temp code uncommented to make sample array from sample string instead of JSON object
-		/**
-		try {
-			mainJSONObject = new JSONObject(jsonString);
-		} catch (JSONException e) {
-			Log.e(LOG_TAG, "Could not find MainJSONobject");
-		}
-		*/
-		
+	
 		try {
 			JSONStationsArray = mainJSONObject.getJSONArray("fuel_stations");
 			Log.e(LOG_TAG, "The number of stations to parse is =" + JSONStationsArray.length());
-		} catch (JSONException e) {
+		}catch (JSONException e) {
 			Log.e(LOG_TAG, "Could not find stations array");
 		}
-		// setup and array to hold each station object
-		stationsArray = new StationInfo[JSONStationsArray.length()];
+		// setup and arrayList to hold each station object
+		stationsArrayList = new ArrayList<StationInfo>();
 		
 		for (int i = 0; i < JSONStationsArray.length(); i++) {
 			//create station to assign value
@@ -174,11 +159,11 @@ public class ParseJaSON {
 				station.setStationId(JSONStationsArray.getJSONObject(i).getInt("id")+"");
 				Log.d(LOG_TAG, "21. id= " + JSONStationsArray.getJSONObject(i).getInt("id")+"");
 				
-			} catch (JSONException e) {
+			}catch (JSONException e) {
 				Log.e(LOG_TAG, "Could not parse station data");
 			}
 			//add station with full info to array
-			stationsArray[i] = station;
+			stationsArrayList.add(station);
 		} //end for loop
 		
 	} //end JSONParser method

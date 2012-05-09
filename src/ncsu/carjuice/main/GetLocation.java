@@ -7,35 +7,43 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 
 /**
  * 
  * @author Jason Brown
- * @version 1.2
+ * @version 1.3
  */
 public class GetLocation {
     
 	Timer timer;
     LocationManager locationManager;
     LocationResult locationResult;
-    boolean isGpsEnabled=false;
-    boolean isNetworkEnabled=false;
+    boolean isGpsEnabled = false;
+    boolean isNetworkEnabled = false;
+    static final String LOG_TAG = "GetLocation";
 
     public boolean getLocation(Context context, LocationResult result) {
         //I use LocationResult callback class to pass location value from MyLocation to user code.
         locationResult=result;
-        if(locationManager==null) {
+        if(locationManager == null) {
             locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         }
         
         //exceptions will be thrown if provider is not permitted.
         try{
         	isGpsEnabled=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        }catch(Exception ex){}
+        }
+        catch(Exception e){
+        	Log.e(LOG_TAG, "GPS NOT enabled or not set");
+        }
         
         try{
         	isNetworkEnabled=locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        }catch(Exception ex){}
+        }
+        catch(Exception e){
+        	Log.e(LOG_TAG, "Cell network NOT enabled or not set");
+        }
 
         //don't start listeners if no provider is enabled
         if(!isGpsEnabled && !isNetworkEnabled)
@@ -49,7 +57,7 @@ public class GetLocation {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListenerNetwork);
         }
         
-        timer=new Timer();
+        timer = new Timer();
         timer.schedule(new GetLastLocation(), 20000);
         return true;
     }
@@ -81,25 +89,28 @@ public class GetLocation {
     class GetLastLocation extends TimerTask {
         @Override
         public void run() {
+             Location networkLocation = null;
+             Location gpsLocation = null;
+             
              locationManager.removeUpdates(locationListenerGps);
              locationManager.removeUpdates(locationListenerNetwork);
 
-             Location netwworkLocation=null, gpsLocation=null;
+             
              if(isGpsEnabled){
-                 gpsLocation=locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                 gpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
              }
              
              if(isNetworkEnabled){
-                 netwworkLocation=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                 networkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
              }
              
              //if there are both values use the latest one
-             if(gpsLocation!=null && netwworkLocation!=null){
-                 if(gpsLocation.getTime()>netwworkLocation.getTime()){
+             if(gpsLocation!=null && networkLocation!=null){
+                 if(gpsLocation.getTime() > networkLocation.getTime()){
                      locationResult.gotLocation(gpsLocation);
                  }
                  else{
-                     locationResult.gotLocation(netwworkLocation);
+                     locationResult.gotLocation(networkLocation);
                  }
                  return;
              }
@@ -109,13 +120,14 @@ public class GetLocation {
                  return;
              }
              
-             if(netwworkLocation!=null){
-                 locationResult.gotLocation(netwworkLocation);
+             if(networkLocation!=null){
+                 locationResult.gotLocation(networkLocation);
                  return;
              }
+             
              locationResult.gotLocation(null);
-        }
-    }
+        } // end run()
+    } //end inner class GetLastLocation
 
     public static abstract class LocationResult{
         public abstract void gotLocation(Location location);

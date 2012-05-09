@@ -1,12 +1,32 @@
 package ncsu.carjuice.main;
 
+import ncsu.carjuice.main.GetLocation.LocationResult;
+import ncsu.carjuice.main.ListViewAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
 import android.widget.EditText;
 
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+
+
 public class CarJuiceActivity extends Activity {
+	
+	
 	
 	//Creating the search query string to send along bundled with the intent to list view
 	public final static String SEARCH_QUERY = "ncsu.carjuice.main.MESSAGE";
@@ -18,7 +38,7 @@ public class CarJuiceActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
+    }
 /*   
 //****On the emulator this code is causing force close due to not being able to 
 //    get GPS or network location, commented out for now 
@@ -39,15 +59,16 @@ public class CarJuiceActivity extends Activity {
         myLocation.getLocation(this, locationResult);        
         
 //----------------------------------end get location--------------------        
+
  */
         
         
-        
-        GetJaSON JSONParser = new GetJaSON();
-       // StationInfo[] stationsArray= JSONParser.getStationArray();
-        
-        
-    }
+ 
+       // Intent intent = new Intent(this, ResultsListActivity.class);
+        //startActivity(intent);
+        //Open the search dialogue on app-launch
+        //onSearchRequested();
+
 
     //Message sent by "Locate" button. Sends an intent to the listview activity
     public void sendMessage(View view) {
@@ -56,15 +77,14 @@ public class CarJuiceActivity extends Activity {
     	Intent intent = new Intent(this, ResultsListActivity.class);
     	
     	
-    	EditText editText = (EditText) findViewById(R.id.edit_address);
-    	String message = editText.getText().toString();
-    	intent.putExtra(SEARCH_QUERY, message);
+    	//EditText editText = (EditText) findViewById(R.id.edit_address);
+    //	String message = editText.getText().toString();
+    	//intent.putExtra(SEARCH_QUERY, message);
     	
     	
     	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
     	//Intent also carries with it the SEARCH_QUERY
     	startActivity(intent);
-    	//TestJSON test = new TestJSON();
     }
 
 }
