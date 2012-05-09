@@ -3,3 +3,9 @@
 /gen
 .classpath
 .settings/*
+/bin/res
+/bin/classes.dex
+/bin/classes
+/bin/res/classes.dex
+/bin/resources.ap_
+/bin/jarlist.cache
