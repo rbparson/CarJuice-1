@@ -23,7 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class StationsListArray extends Activity { 
+public class StationsListActivity extends Activity { 
 
 	static final String KEY_NAME = "name";							
 	static final String KEY_ADDRESS = "address";					

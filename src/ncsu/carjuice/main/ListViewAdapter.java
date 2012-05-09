@@ -52,9 +52,9 @@ public class ListViewAdapter extends BaseAdapter {
         stationMap = dataArrayList.get(position);
         
         // Setting all values in listview
-        name.setText(stationMap.get(ResultsListActivity.KEY_NAME));
-        address.setText(stationMap.get(ResultsListActivity.KEY_ADDRESS));
-        distance.setText(stationMap.get(ResultsListActivity.KEY_DISTANCE));
+        name.setText(stationMap.get(StationsListActivity.KEY_NAME));
+        address.setText(stationMap.get(StationsListActivity.KEY_ADDRESS));
+        distance.setText(stationMap.get(StationsListActivity.KEY_DISTANCE));
         //imageLoader.DisplayImage(stationMap.get(CustomizedListView.KEY_THUMB_URL), thumb_image);
         return view;
     }

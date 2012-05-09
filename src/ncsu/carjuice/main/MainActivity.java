@@ -1,18 +1,18 @@
 package ncsu.carjuice.main;
 
+
 import ncsu.carjuice.main.GetLocation.LocationResult;
 import ncsu.carjuice.main.ListViewAdapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
->>>>>>> myBranch:src/ncsu/carjuice/main/MainActivity.java
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+
 
 public class MainActivity extends Activity {
 	
@@ -56,12 +56,17 @@ public class MainActivity extends Activity {
         GetJaSON JSONParser = new GetJaSON();
        // StationInfo[] stationsArray= JSONParser.getStationArray();
 
+
+        
+   
+
  */       
 
         Intent intent = new Intent(this, ResultsListActivity.class);
         startActivity(intent);
         //Open the search dialogue on app-launch
         //onSearchRequested();
+
         
         
     }
