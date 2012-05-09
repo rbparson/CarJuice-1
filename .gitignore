@@ -1,8 +1,10 @@
 *.apk
 *.class
-/gen
 .classpath
 .settings/*
+.project
+proguard-project.txt
+project.properties
 /bin/res
 /bin/classes.dex
 /bin/classes
