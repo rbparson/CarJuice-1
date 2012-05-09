@@ -1,25 +1,11 @@
 package ncsu.carjuice.main;
 
-<<<<<<< HEAD:src/ncsu/carjuice/main/CarJuiceActivity.java
-=======
 import ncsu.carjuice.main.GetLocation.LocationResult;
 import ncsu.carjuice.main.ListViewAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-
->>>>>>> myBranch:src/ncsu/carjuice/main/MainActivity.java
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-<<<<<<< HEAD:src/ncsu/carjuice/main/CarJuiceActivity.java
-import android.widget.EditText;
-=======
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -63,21 +49,19 @@ public class MainActivity extends Activity {
         myLocation.getLocation(this, locationResult);        
         
 //----------------------------------end get location--------------------        
-<<<<<<< HEAD:src/ncsu/carjuice/main/CarJuiceActivity.java
- */
+
         
         
         
         GetJaSON JSONParser = new GetJaSON();
        // StationInfo[] stationsArray= JSONParser.getStationArray();
-=======
+
  */       
 
         Intent intent = new Intent(this, ResultsListActivity.class);
         startActivity(intent);
         //Open the search dialogue on app-launch
         //onSearchRequested();
->>>>>>> myBranch:src/ncsu/carjuice/main/MainActivity.java
         
         
     }
