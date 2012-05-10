@@ -34,6 +34,16 @@
   	<!-- need this one to use debugger 	<uses-permission android:name="android.permission.SET_DEBUG_APP" />  -->
   		
   	<!-- End Required Permissions List -->
+  	
+  	<!-- Begin Supported Display Information -->
+  	<supports-screens 	android:resizeable="true"
+				 	  	android:smallScreens="false"
+                  		android:normalScreens="true"
+                  		android:largeScreens="false"
+                  		android:xlargeScreens="false"
+                  		android:anyDensity="false"/>
+              
+	<!-- End Supported Display Information -->
   		
     
     <application
