@@ -27,6 +27,8 @@
         <requestFocus />
     </EditText>
     
+    
+    <!-- need to move the onClick to inside mainActivity.java as a listener if search string ="", use location else use search string -->
     <ImageButton android:id="@+id/search"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -36,6 +38,7 @@
 		android:background="@null"
 		android:onClick="sendQuery"
 		android:text="@string/search"
+		android:contentDescription="@string/locate_button"
 		/>
 		
 	<ImageView android:id="@+id/searchtext"
@@ -44,6 +47,7 @@
 		android:layout_marginTop="261dp"
 		android:layout_centerHorizontal="true"
 		android:src="@drawable/search"
+		android:contentDescription="@string/search_box"
 		/>
 		
 	<ImageView android:id="@+id/shine"
@@ -52,6 +56,7 @@
 		android:layout_marginTop="246dp"
 		android:layout_centerHorizontal="true"
 		android:src="@drawable/btn_locate_shine"
+		android:contentDescription="@string/locate_button_shiny"
 		/>
 		
 	<ImageButton android:id="@+id/settings"
@@ -61,6 +66,7 @@
 		android:layout_marginTop="440dp"
 		android:src="@drawable/settings_button"
 		android:background="@null"
+		android:contentDescription="@string/settings_button"
 		/>
 
 </RelativeLayout>
