@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -55,7 +56,9 @@ public class StationsListActivity extends Activity {
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
+    	
     	Intent queryIntent = getIntent();
+    	
     	if(!queryIntent.getStringExtra(MainActivity.SEARCH_QUERY).equals("")){
     		query = queryIntent.getStringExtra(MainActivity.SEARCH_QUERY);
     		JSONObject = (new GetJSONObject(query, 30).returnJSONObject() );  //@@@@@@@@@@@@@@@@@still using hard coded radius param of 30@@@@@@@@@@@@@@@@@@@@@@@@
@@ -157,10 +160,15 @@ public class StationsListActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {            	
             	// custom dialog
 				final Dialog dialog = new Dialog(context);
+				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialog.setContentView(R.layout.station_details);
 				
-				//Set the title
-				dialog.setTitle(stationsList.get(position).get(KEY_NAME));
+				//Set the title, probably station name?
+				//dialog.setTitle(stationsList.get(position).get(KEY_NAME));
+				Log.d("POSITION", "the position is " + position);
+				
+				TextView stationName = (TextView) dialog.findViewById(R.id.stationName);
+				stationName.setText(stationsList.get(position).get(KEY_NAME));
 				
 				TextView address = (TextView) dialog.findViewById(R.id.address);
 				address.setText(stationsList.get(position).get(KEY_ADDRESS) + "\n" + stationsList.get(position).get(KEY_CITY)+ ", "+ stationsList.get(position).get(KEY_STATE)+"   "+ stationsList.get(position).get(KEY_ZIP));
@@ -179,8 +187,8 @@ public class StationsListActivity extends Activity {
 				
 				final Intent mapIntent = new Intent(context, MapsActivity.class);
 				
-				mapIntent.putExtra(PIN_LONG, "-78.6382924");   	//@@@@@@@@@@@@@@@@@-hard coded values-@@@@@@@@@@@@@@@@
-		    	mapIntent.putExtra(PIN_LAT, "35.7748033");		//@@@@@@@@@@@@@@@@@-hard coded values-@@@@@@@@@@@@@@@@
+				mapIntent.putExtra(PIN_LONG, stationsList.get(position).get(KEY_LONGITUDE));
+		    	mapIntent.putExtra(PIN_LAT, stationsList.get(position).get(KEY_LATITUDE));
 				
 				//Button to send to maps view
 				Button mapButton = (Button) dialog.findViewById(R.id.mapButton);

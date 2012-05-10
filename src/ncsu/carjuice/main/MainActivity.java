@@ -47,43 +47,50 @@ public class MainActivity extends Activity {
  */       
         
     }
-    
-    //Message sent by "Locate" button. Sends an intent to the listview activity
-    public void sendLocation(View view) {
+   
+    public void invalidSearchAlert ()
+    {
     	
-        // Do something in response to button
-    	Intent intent = new Intent(this, StationsListActivity.class);
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ HARD CODED LONG/LAT @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    	
-    	longitude="123";
-    	latitude="456";
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    	
-    	intent.putExtra(LONG, longitude);
-    	intent.putExtra(LAT, latitude);
-    	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
-    	//Intent also carries with it the SEARCH_QUERY
-    	startActivity(intent);
-    }    
+		final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+		alertDialog.setTitle("Invalid Input");
+		alertDialog.setMessage("Please Enter a Valid Address, City, State, or Zip Code");
+		
+		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+		      public void onClick(DialogInterface dialog, int which) {
+		 	       alertDialog.dismiss();
+		    } });
+		
+		alertDialog.show();
+		
+    }
+    
 
     //Message sent by Search button. Sends an intent to the listview activity
     public void sendQuery(View view) {
     	
         // Do something in response to button
+    	
     	Intent intent = new Intent(this, StationsListActivity.class);
     	
     	EditText editText = (EditText) findViewById(R.id.edit_address);
     	String message = editText.getText().toString().trim();
     	
     	if(message.length() == 0){
-    		final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-    		alertDialog.setTitle("Invalid Address Entered");
-    		alertDialog.setMessage("Please Enter a Valid Address, or a City, or a State, or a Zip Code");
     		
-    		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-    		      public void onClick(DialogInterface dialog, int which) {
-    		 	       alertDialog.dismiss();
-    		    } });
+    		//putting empty string into Search Query so our logic in StationsListActivity works and we don't get null pointer exception
+    		intent.putExtra(SEARCH_QUERY, "");
     		
-    		alertDialog.show();
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ HARD CODED LONG/LAT @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    	
+        	latitude="35.77435";
+        	longitude="-78.64233";
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    	
+        	
+        	intent.putExtra(LONG, longitude);
+        	intent.putExtra(LAT, latitude);
+        	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
+        	//Intent also carries with it the SEARCH_QUERY
+        	startActivity(intent);
+    		
     	}
     	else{
     		intent.putExtra(SEARCH_QUERY, message);
