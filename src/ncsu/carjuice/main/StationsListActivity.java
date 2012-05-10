@@ -204,7 +204,7 @@ public class StationsListActivity extends Activity {
 				Log.d("POSITION", "the position is " + position);
 				
 				TextView address = (TextView) dialog.findViewById(R.id.address);
-				address.setText(stationsList.get(position).get(KEY_ADDRESS));
+				address.setText(stationsList.get(position).get(KEY_ADDRESS)+" "+stationsList.get(position).get(KEY_CITY)+ ", "+stationsList.get(position).get(KEY_STATE)+" "+stationsList.get(position).get(KEY_ZIP));
 				
 				TextView distance = (TextView) dialog.findViewById(R.id.distance);
 				distance.setText("Distance: "+stationsList.get(position).get(KEY_DISTANCE));
@@ -264,8 +264,16 @@ public class StationsListActivity extends Activity {
 				}
 				
 				//Should we just make this text a link to the website?
+				if(stationsList.get(position).get(KEY_CHARGING_NETWORK).equals("null"))
+				{
+					TextView network = (TextView) dialog.findViewById(R.id.network);
+					network.setText("Network: None");
+				}
+				else
+				{
 				TextView network = (TextView) dialog.findViewById(R.id.network);
 				network.setText("Network: "+stationsList.get(position).get(KEY_CHARGING_NETWORK));
+				}
 				
 				TextView groupsWithAccess = (TextView) dialog.findViewById(R.id.groupsWithAccess);
 				groupsWithAccess.setText("Groups With Access: "+stationsList.get(position).get(KEY_GROUPS_WITH_ACCESS));
