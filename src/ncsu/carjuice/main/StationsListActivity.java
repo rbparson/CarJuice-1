@@ -22,6 +22,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -193,7 +194,7 @@ public class StationsListActivity extends Activity {
 		    	mapIntent.putExtra(PIN_LAT, stationsList.get(position).get(KEY_LATITUDE));
 				
 				//Button to send to maps view
-				Button mapButton = (Button) dialog.findViewById(R.id.mapButton);
+				ImageButton mapButton = (ImageButton) dialog.findViewById(R.id.mapButton);
 				
 				// if button is clicked, close the custom dialog
 				mapButton.setOnClickListener(new OnClickListener() {
@@ -203,7 +204,7 @@ public class StationsListActivity extends Activity {
 				}); //end onClick
 				
 				//Button to send launch navigation
-				Button navButton = (Button) dialog.findViewById(R.id.navButton);
+				ImageButton navButton = (ImageButton) dialog.findViewById(R.id.navButton);
 				// if button is clicked, close the custom dialog
 				navButton.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {

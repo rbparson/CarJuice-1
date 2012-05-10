@@ -4,17 +4,7 @@
     android:layout_height="match_parent"
     android:baselineAligned="true"
     android:background="@drawable/bg_main"
-    android:orientation="horizontal" >
-
-    <!--Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/edit_address"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/edit_address"
-        android:onClick="sendQuery"
-        android:text="@string/search" /-->
+    android:orientation="horizontal" >s
 
     <EditText
         android:id="@+id/edit_address"
