@@ -53,10 +53,12 @@ public class MainActivity extends Activity {
     	
         // Do something in response to button
     	Intent intent = new Intent(this, StationsListActivity.class);
-    	
-    	
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ HARD CODED LONG/LAT @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    	
+    	longitude="123";
+    	latitude="456";
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    	
     	intent.putExtra(LONG, longitude);
-    	intent.putExtra(LONG, latitude);
+    	intent.putExtra(LAT, latitude);
     	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
     	//Intent also carries with it the SEARCH_QUERY
     	startActivity(intent);

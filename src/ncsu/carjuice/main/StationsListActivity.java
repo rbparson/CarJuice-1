@@ -202,17 +202,17 @@ public class StationsListActivity extends Activity {
 				dialog.setTitle(stationsList.get(position).get(KEY_NAME));
 				
 				Log.d("POSITION", "the position is " + position);
+				
 				TextView address = (TextView) dialog.findViewById(R.id.address);
-				address.setText("12 Shepherd Drive, Raleigh, NC 27607");
+				address.setText(stationsList.get(position).get(KEY_ADDRESS));
 				
 				TextView distance = (TextView) dialog.findViewById(R.id.distance);
-				distance.setText("Distance: 6.9 Miles");
+				distance.setText(stationsList.get(position).get(KEY_DISTANCE));
 				
 				TextView intersection = (TextView) dialog.findViewById(R.id.intersection);
-				intersection.setText("First right after intersection of Hillsborough St. and Dixie Trail");
+				intersection.setText(stationsList.get(position).get(KEY_INTERSECTION));
 				
 				final Intent mapIntent = new Intent(context, MapsActivity.class);
-				
 				//Button to send to maps view
 				Button mapButton = (Button) dialog.findViewById(R.id.mapButton);
 				// if button is clicked, close the custom dialog
@@ -225,30 +225,30 @@ public class StationsListActivity extends Activity {
 				});
 				
 				TextView level1Chargers = (TextView) dialog.findViewById(R.id.level1Chargers);
-				level1Chargers.setText("1 Level 1 Charger");
+				level1Chargers.setText(stationsList.get(position).get(KEY_LEVEL1_CHARGERS));
 				
 				TextView level2Chargers = (TextView) dialog.findViewById(R.id.level2Chargers);
-				level2Chargers.setText("1 Level 2 Charger");
+				level2Chargers.setText(stationsList.get(position).get(KEY_LEVEL2_CHARGERS));
 				
 				TextView dcFastChargers = (TextView) dialog.findViewById(R.id.dcFastChargers);
-				dcFastChargers.setText("1 DC Fast Charger");
+				dcFastChargers.setText(stationsList.get(position).get(KEY_DC_FAST_CHARGERS));
 				
 				//Need to parse the codes to words
 				TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
-				ownerType.setText("Owner: Privately Owned");
+				ownerType.setText(stationsList.get(position).get(KEY_OWNER_TYPE));
 				
 				//Should we just make this text a link to the website?
 				TextView network = (TextView) dialog.findViewById(R.id.network);
-				network.setText("Network: Sharepoint Network");
+				network.setText(stationsList.get(position).get(KEY_CHARGING_NETWORK));
 				
 				TextView groupsWithAccess = (TextView) dialog.findViewById(R.id.groupsWithAccess);
-				groupsWithAccess.setText("All groups have access");
+				groupsWithAccess.setText(stationsList.get(position).get(KEY_GROUPS_WITH_ACCESS));
 				
 				TextView cardsAccepted = (TextView) dialog.findViewById(R.id.cardsAccepted);
-				cardsAccepted.setText("Payment Methods: All major credit cards accepted");
+				cardsAccepted.setText(stationsList.get(position).get(KEY_PAYMENT_TYPES));
 				
 				TextView telephone = (TextView) dialog.findViewById(R.id.telephone);
-				telephone.setText("1-800-123-4567");
+				telephone.setText(stationsList.get(position).get(KEY_PHONE_NUMBER));
 
 				Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);			
 				// if button is clicked, close the custom dialog
