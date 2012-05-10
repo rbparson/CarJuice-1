@@ -115,7 +115,6 @@ public class SettingsActivity extends Activity {
     	
     	stage1.setOnClickListener(new OnClickListener() {
 
-			@Override
 			public void onClick(View v) {
 				commitPreferences();
 				if (((CheckBox) v).isChecked()) {
@@ -134,7 +133,6 @@ public class SettingsActivity extends Activity {
     	
     	stage2.setOnClickListener(new OnClickListener() {
 
-			@Override
 			public void onClick(View v) {
 				commitPreferences();
 				if (((CheckBox) v).isChecked()) {
@@ -153,7 +151,6 @@ public class SettingsActivity extends Activity {
     	
     	dcfast.setOnClickListener(new OnClickListener() {
 
-			@Override
 			public void onClick(View v) {
 				commitPreferences();
 				if (((CheckBox) v).isChecked()) {
