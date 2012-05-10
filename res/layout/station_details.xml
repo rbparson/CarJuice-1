@@ -62,6 +62,18 @@
 		 	    android:layout_marginBottom="5dp"
 		     	android:layout_below="@+id/intersection"
 		     	android:text="@string/map_it" />
+		     
+		     <Button
+		     	android:id="@+id/navButton"
+		     	android:layout_width="fill_parent"
+		     	android:layout_height="37dp"
+		     	android:layout_alignParentLeft="true"
+		     	android:layout_alignParentRight="true"
+		     	android:layout_marginRight="40dp"
+		     	android:layout_marginLeft="40dp"
+		 	    android:layout_marginBottom="5dp"
+		     	android:layout_below="@+id/mapButton"
+		     	android:text="Directions" />
 		    
 		    <TextView
 		        android:id="@+id/level1Chargers"
@@ -70,7 +82,7 @@
 		        android:layout_marginBottom="5dp"
 		 	    android:layout_marginLeft="13dp"
 		        android:textColor="#FFF" 
-		        android:layout_below="@+id/mapButton"/>
+		        android:layout_below="@+id/navButton"/>
 		    
 		    <TextView
 		        android:id="@+id/level2Chargers"

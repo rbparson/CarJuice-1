@@ -13,6 +13,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -198,6 +199,17 @@ public class StationsListActivity extends Activity {
 				mapButton.setOnClickListener(new OnClickListener() {
 					public void onClick(View v) {
 						startActivity(mapIntent);
+					}
+				}); //end onClick
+				
+				//Button to send launch navigation
+				Button navButton = (Button) dialog.findViewById(R.id.navButton);
+				// if button is clicked, close the custom dialog
+				navButton.setOnClickListener(new OnClickListener() {
+					public void onClick(View v) {
+						Intent i = new Intent(Intent.ACTION_VIEW, 
+								Uri.parse("google.navigation:q=New+York+NY")); 
+								startActivity(i);
 					}
 				}); //end onClick
 				
