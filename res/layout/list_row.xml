@@ -6,8 +6,6 @@
     android:orientation="horizontal"
     android:padding="5dip" >
 
-	
-	<!-- *********maybe put the navigate button here******** -->
 	<!--  ListRow Left sied Thumbnail image -->
 	<LinearLayout android:id="@+id/thumbnail" 
 		android:layout_width="wrap_content"
@@ -16,12 +14,13 @@
         android:layout_alignParentLeft="true" 
 	    android:layout_marginRight="5dip">
         
+	    <!-- *********maybe put the navigate button here******** -->
 		<ImageView 
 		    android:id="@+id/list_image"   
 	        android:layout_width="50dip"
 	        android:layout_height="50dip"
 	        android:src="@drawable/rihanna" 
-	        android:contentDescription="navigationIcon"/>
+	        android:contentDescription="@string/navigationicon"/>
         
 	</LinearLayout>
     
@@ -32,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
-        android:text="Charging Station Name"
+        android:text="@string/charging_station_name"
         android:textColor="#040404"
         android:typeface="sans" 
         android:textSize="15dip"
@@ -49,23 +48,22 @@
         android:textSize="10dip"
         android:layout_marginTop="2dip"
         android:layout_toRightOf="@+id/thumbnail"
-        android:text="1234 Somewhere St.
-Raleigh, NC 27408" />
+        android:text="@string/_1234_somewhere_st_" />
     <!--had to hit enter to make Raleigh, NC 27408 go to next line in text view -->
     
 
-	<!-- Rightend Distance -->
+	<!-- Rightend Distance --> <!-- old color blue "#10bcc9" -->
     <TextView
         android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@drawable/arrow"
-        android:layout_alignBottom="@+id/thumbnail"
+        android:layout_alignParentBottom="true"
         android:gravity="right"
-        android:text="5.45 miles"
+        android:text="@string/_5_45_miles"
         android:textSize="10dip"
-        android:textColor="#10bcc9"
+        android:textColor="#343434"						
         android:textStyle="bold"/>
       
      <!-- Rightend Arrow -->    
@@ -74,6 +72,7 @@ Raleigh, NC 27408" />
      	android:layout_height="wrap_content"
      	android:src="@drawable/arrow"
      	android:layout_alignParentRight="true"
-     	android:layout_centerVertical="true"/>
+     	android:layout_centerVertical="true"
+     	android:contentDescription="@string/rightend_arrow"/>
 
 </RelativeLayout>
