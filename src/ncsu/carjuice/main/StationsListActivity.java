@@ -72,6 +72,11 @@ public class StationsListActivity extends Activity {
 	String query="";
 	String longitude;
 	String latitude;
+	
+	//String extras to send with intent to map-view
+	public static final  String PIN_LONG = "ncsu.carjuice.main.MESSAGE";
+	public static final  String PIN_LAT = "ncsu.carjuice.main.MESSAGE";
+	
 	ListView list;
     ListViewAdapter adapter;
     JSONObject JSONObject;
@@ -209,10 +214,23 @@ public class StationsListActivity extends Activity {
 				TextView distance = (TextView) dialog.findViewById(R.id.distance);
 				distance.setText("Distance: "+stationsList.get(position).get(KEY_DISTANCE));
 				
-				TextView intersection = (TextView) dialog.findViewById(R.id.intersection);
-				intersection.setText("Intersection: "+stationsList.get(position).get(KEY_INTERSECTION));
+				if(stationsList.get(position).get(KEY_INTERSECTION).equals("null"))
+				{
+					TextView intersection = (TextView) dialog.findViewById(R.id.intersection);
+					intersection.setText("Intersection: None provided");
+				}
+				else
+				{
+					TextView intersection = (TextView) dialog.findViewById(R.id.intersection);
+					intersection.setText("Intersection: "+stationsList.get(position).get(KEY_INTERSECTION));
+				}
+				
 				
 				final Intent mapIntent = new Intent(context, MapsActivity.class);
+				
+				mapIntent.putExtra(PIN_LONG, stationsList.get(position).get(KEY_LONGITUDE));
+		    	mapIntent.putExtra(PIN_LAT, stationsList.get(position).get(KEY_LATITUDE));
+				
 				//Button to send to maps view
 				Button mapButton = (Button) dialog.findViewById(R.id.mapButton);
 				// if button is clicked, close the custom dialog
@@ -277,20 +295,7 @@ public class StationsListActivity extends Activity {
 				
 				TextView groupsWithAccess = (TextView) dialog.findViewById(R.id.groupsWithAccess);
 				groupsWithAccess.setText("Groups With Access: "+stationsList.get(position).get(KEY_GROUPS_WITH_ACCESS));
-				
-				
-				if(stationsList.get(position).get(KEY_PAYMENT_TYPES).equals("null"))
-				{
-					TextView cardsAccepted = (TextView) dialog.findViewById(R.id.cardsAccepted);
-					cardsAccepted.setText("Payment Accepted: Unknown or free");
-				}
-				else
-				{
-					TextView cardsAccepted = (TextView) dialog.findViewById(R.id.cardsAccepted);
-					cardsAccepted.setText("Payment Accepted: "+stationsList.get(position).get(KEY_PAYMENT_TYPES));
-				}
 								
-			
 				TextView telephone = (TextView) dialog.findViewById(R.id.telephone);
 				telephone.setText("Station Phone: "+stationsList.get(position).get(KEY_PHONE_NUMBER));
 

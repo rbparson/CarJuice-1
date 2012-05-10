@@ -117,22 +117,13 @@
 		        android:layout_below="@+id/network"/>
 		    
 		    <TextView
-		        android:id="@+id/cardsAccepted"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:layout_marginBottom="5dp"
-		 	    android:layout_marginLeft="13dp"
-		        android:textColor="#FFF" 
-		        android:layout_below="@+id/groupsWithAccess"/>
-		    
-		    <TextView
 		        android:id="@+id/telephone"
 		        android:layout_width="fill_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_marginBottom="5dp"
 		 	    android:layout_marginLeft="13dp"
 		        android:textColor="#FFF" 
-		        android:layout_below="@+id/cardsAccepted"/>
+		        android:layout_below="@+id/groupsWithAccess"/>
 		    
 		    <Button
 		 	    android:id="@+id/dialogButtonOK"
