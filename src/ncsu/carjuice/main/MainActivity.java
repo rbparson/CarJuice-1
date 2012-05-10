@@ -10,6 +10,9 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 	
+	//default name to access settings across any activity
+	//public static final String APP_SETTINGS = "AppSettings";
+	
 	//Creating the search query string to send along bundled with the intent to list view
 	protected final static String SEARCH_QUERY = "ncsu.carjuice.main.SEARCH_QUERY";
 	protected static String LONG = "ncsu.carjuice.main.LONG";
@@ -47,6 +50,16 @@ public class MainActivity extends Activity {
  */       
         
     }
+    
+    
+    //Sends an intent to the SettingsActivity, attached to the settings icon
+    public void viewSettings(View view) {
+    	
+    	Intent intent = new Intent(this, SettingsActivity.class);	
+    	startActivity(intent);
+	
+    }// of viewSettings 
+    
    
     public void invalidSearchAlert ()
     {

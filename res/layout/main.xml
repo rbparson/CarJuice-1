@@ -66,6 +66,7 @@
 		android:layout_marginTop="440dp"
 		android:src="@drawable/settings_button"
 		android:background="@null"
+		android:onClick="viewSettings"
 		android:contentDescription="@string/settings_button"
 		/>
 

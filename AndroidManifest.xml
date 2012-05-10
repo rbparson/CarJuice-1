@@ -53,6 +53,8 @@
             </intent-filter>
         </activity>
         
+        <activity android:screenOrientation="portrait" android:name="ncsu.carjuice.main.SettingsActivity"/>
+        
 	    <activity android:screenOrientation="portrait" android:name="ncsu.carjuice.main.StationsListActivity"/>
 	    
 	    <activity android:screenOrientation="portrait" android:name="ncsu.carjuice.main.MapsActivity"/>
