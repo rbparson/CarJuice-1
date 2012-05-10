@@ -11,12 +11,12 @@ import android.widget.EditText;
 public class MainActivity extends Activity {
 	
 	//Creating the search query string to send along bundled with the intent to list view
-	public final static String SEARCH_QUERY = "ncsu.carjuice.main.MESSAGE";
-	public final static String LONG = "ncsu.carjuice.main.MESSAGE";
-	public final static String LAT = "ncsu.carjuice.main.MESSAGE";
+	protected final static String SEARCH_QUERY = "ncsu.carjuice.main.SEARCH_QUERY";
+	protected static String LONG = "ncsu.carjuice.main.LONG";
+	protected static String LAT = "ncsu.carjuice.main.LAT";
 	
-	String longitude;
-	String latitude;
+	private String longitude;
+	private String latitude;
 
     /** Called when the activity is first created. */
    	

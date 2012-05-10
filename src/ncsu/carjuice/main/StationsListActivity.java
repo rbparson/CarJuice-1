@@ -23,24 +23,16 @@ import android.widget.TextView;
 
 public class StationsListActivity extends Activity {
 	
-	
-
 	static final String KEY_NAME = "name";							
 	static final String KEY_ADDRESS = "address";					
 	static final String KEY_INTERSECTION = "intersection";				//Brief additional information about how to locate the station.
 	static final String KEY_CITY = "city";								// city station is in
 	static final String KEY_STATE = "state";							//The two character U.S. state or  of the station's location.
-	static final String KEY_ZIP = "zip";								// zip code
+	static final String KEY_ZIP = "zip";								// postal code
 	static final String KEY_PHONE_NUMBER = "phoneNumber";				// phone number
 	static final String KEY_GROUPS_WITH_ACCESS = "groupsWithAccess";	//A description of who is allowed to access the station
 	static final String KEY_OPERATING_HOURS = "operatingHours";			// hours station is open
-	static final String KEY_OWNER_TYPE = "ownerType";					//A space-separated list of owner codes.
-																		/**
-																		 * P=Privately owned
-																		 * T=Utility owned
-																		 * FG=Federal government owned
-																		 * LG=Local government owned, SG=State government owned.
-																		 */
+	static final String KEY_OWNER_TYPE = "ownerType";					//A space-separated list of owner codes.P=Privately owned, T=Utility owned, FG=Federal government owned, LG=Local government owned, SG=State government owned
 	static final String KEY_CHARGING_NETWORK = "chargingNetwork";		//the name of the EVSE network, if applicable.
 	static final String KEY_LATITUDE = "latitude";						//The latitude of the station's address Range: -90 to 90
 	static final String KEY_LONGITUDE = "longitude";					//The longitude of the station's address Range -180 to 180
@@ -50,18 +42,16 @@ public class StationsListActivity extends Activity {
 	static final String KEY_DC_FAST_CHARGERS = "dcFastChargers";		//The number of DC Fast Chargers
 	static final String KEY_STATION_ID = "stationId";					//A unique identifier for this specific station.
 	static final String LOG_TAG = "JSONParsing";						// Log Tag for debugging
-	static final String PIN_LONG = "ncsu.carjuice.main.MESSAGE";		//String extras to send with intent to map-view
-	static final String PIN_LAT = "ncsu.carjuice.main.MESSAGE";			//String extras to send with intent to map-view
-	
-	private String query="";
-	private String longitude;
-	private String latitude;
+	static final String PIN_LONG = "ncsu.carjuice.main.PIN_LONG";		//String extras to send with intent to map-view
+	static final String PIN_LAT = "ncsu.carjuice.main.PIN_LAT";			//String extras to send with intent to map-view
+	private String query="";											//user query from search box
+	private String longitude;											//longitude
+	private String latitude;											//latitude
 	private ListView list;
 	private ListViewAdapter adapter;
 	private JSONObject JSONObject;
 	private final Context context = this;
-
-    ArrayList<HashMap<String, String>> stationsList = new ArrayList<HashMap<String, String>>();
+    private ArrayList<HashMap<String, String>> stationsList = new ArrayList<HashMap<String, String>>();
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -194,8 +184,8 @@ public class StationsListActivity extends Activity {
 				
 				final Intent mapIntent = new Intent(context, MapsActivity.class);
 				
-				mapIntent.putExtra(PIN_LONG, stationsList.get(position).get(KEY_LONGITUDE));
-		    	mapIntent.putExtra(PIN_LAT, stationsList.get(position).get(KEY_LATITUDE));
+				mapIntent.putExtra(PIN_LONG, "-78.6382924");
+		    	mapIntent.putExtra(PIN_LAT, "35.7748033");
 				
 				//Button to send to maps view
 				Button mapButton = (Button) dialog.findViewById(R.id.mapButton);
