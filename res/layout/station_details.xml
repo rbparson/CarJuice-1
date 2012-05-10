@@ -50,30 +50,32 @@
 		        android:layout_marginBottom="5dp"
 		 	    android:layout_marginLeft="13dp"
 		        android:textColor="#FFF" 
-		        android:layout_below="@+id/distance"/> 		
-		     <Button
-		     	android:id="@+id/mapButton"
-		     	android:layout_width="fill_parent"
-		     	android:layout_height="37dp"
-		     	android:layout_alignParentLeft="true"
-		     	android:layout_alignParentRight="true"
-		     	android:layout_marginRight="40dp"
-		     	android:layout_marginLeft="40dp"
-		 	    android:layout_marginBottom="5dp"
-		     	android:layout_below="@+id/intersection"
-		     	android:text="@string/map_it" />
+		        android:layout_below="@+id/distance"/> 
 		     
-		     <Button
-		     	android:id="@+id/navButton"
-		     	android:layout_width="fill_parent"
-		     	android:layout_height="37dp"
-		     	android:layout_alignParentLeft="true"
-		     	android:layout_alignParentRight="true"
-		     	android:layout_marginRight="40dp"
+		     <RelativeLayout>
+		     <ImageButton android:id="@+id/mapButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="40dp"
 		     	android:layout_marginLeft="40dp"
 		 	    android:layout_marginBottom="5dp"
-		     	android:layout_below="@+id/mapButton"
-		     	android:text="Directions" />
+				android:src="@drawable/mapicon"
+				android:background="@null"
+				android:layout_below="@+id/intersection"
+				android:contentDescription="Map It"
+				/>
+		    
+		     <ImageButton android:id="@+id/navButton"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="40dp"
+		     	android:layout_marginLeft="40dp"
+		 	    android:layout_marginBottom="5dp"
+				android:src="@drawable/navigation"
+				android:background="@null"
+				android:layout_toRightOf="@+id/mapButton"
+				android:contentDescription="Navigate"
+				/>
 		    
 		    <TextView
 		        android:id="@+id/level1Chargers"
@@ -82,7 +84,7 @@
 		        android:layout_marginBottom="5dp"
 		 	    android:layout_marginLeft="13dp"
 		        android:textColor="#FFF" 
-		        android:layout_below="@+id/navButton"/>
+		        android:layout_below="@+id/mapButton"/>
 		    
 		    <TextView
 		        android:id="@+id/level2Chargers"
@@ -148,18 +150,19 @@
 		        android:textColor="#FFF" 
 		        android:layout_below="@+id/groupsWithAccess"/>
 		    
-		    
-		</RelativeLayout>
-    </ScrollView>
-    <Button
+		    <Button
 		 	    android:id="@+id/dialogButtonOK"
 		 	    android:layout_width="fill_parent"
 		 	    android:layout_height="48dp"
-		 	    android:layout_alignParentBottom="true"
 		 	    android:layout_alignParentLeft="true"
 		 	    android:layout_marginRight="3dp"
 		 	    android:layout_marginBottom="3dp"
 		 	    android:layout_marginLeft="3dp"
+		 	    android:layout_below="@+id/telephone"
 		 	    android:text="@string/dialog_back"
 		 	    />
+		</RelativeLayout>
+    </ScrollView>
+    
+    
 </RelativeLayout>
