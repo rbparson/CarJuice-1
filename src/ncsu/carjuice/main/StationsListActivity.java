@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -201,12 +202,15 @@ public class StationsListActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {            	
             	// custom dialog
 				final Dialog dialog = new Dialog(context);
+				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialog.setContentView(R.layout.station_details);
 				
 				//Set the title, probably station name?
-				dialog.setTitle(stationsList.get(position).get(KEY_NAME));
-				
+				//dialog.setTitle(stationsList.get(position).get(KEY_NAME));
 				Log.d("POSITION", "the position is " + position);
+				
+				TextView stationName = (TextView) dialog.findViewById(R.id.stationName);
+				stationName.setText(stationsList.get(position).get(KEY_NAME));
 				
 				TextView address = (TextView) dialog.findViewById(R.id.address);
 				address.setText(stationsList.get(position).get(KEY_ADDRESS)+" "+stationsList.get(position).get(KEY_CITY)+ ", "+stationsList.get(position).get(KEY_STATE)+" "+stationsList.get(position).get(KEY_ZIP));
