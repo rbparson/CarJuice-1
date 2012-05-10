@@ -22,17 +22,13 @@ public class MapsActivity extends MapActivity {
         
         Intent mapIntent = getIntent();
         
-        String latitude = mapIntent.getStringExtra(StationsListActivity.PIN_LAT);
-    	String longitude = mapIntent.getStringExtra(StationsListActivity.PIN_LONG);
- 
-        
         MapView mapView = (MapView) findViewById(R.id.mapView);
         mapView.setBuiltInZoomControls(true); // Displaying Zooming controls
         mapView.setTraffic(true); // Traffic View
         
         MapController mc = mapView.getController();
-        double lat = Double.parseDouble(latitude); // latitude
-        double lon = Double.parseDouble(longitude); // longitude
+        double lat = Double.parseDouble(mapIntent.getStringExtra(StationsListActivity.PIN_LAT)); // latitude
+        double lon = Double.parseDouble(mapIntent.getStringExtra(StationsListActivity.PIN_LONG)); // longitude
         GeoPoint geoPoint = new GeoPoint((int)(lat * 1E6), (int)(lon * 1E6));
         mc.animateTo(geoPoint);
         mc.setZoom(13);

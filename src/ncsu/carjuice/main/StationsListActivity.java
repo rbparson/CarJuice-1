@@ -74,8 +74,8 @@ public class StationsListActivity extends Activity {
 	String latitude;
 	
 	//String extras to send with intent to map-view
-	public static final  String PIN_LONG = "ncsu.carjuice.main.MESSAGE";
-	public static final  String PIN_LAT = "ncsu.carjuice.main.MESSAGE";
+	public static final  String PIN_LONG = "ncsu.carjuice.main.PIN_LONG";
+	public static final  String PIN_LAT = "ncsu.carjuice.main.PIN_LAT";
 	
 	ListView list;
     ListViewAdapter adapter;
@@ -228,8 +228,8 @@ public class StationsListActivity extends Activity {
 				
 				final Intent mapIntent = new Intent(context, MapsActivity.class);
 				
-				mapIntent.putExtra(PIN_LONG, stationsList.get(position).get(KEY_LONGITUDE));
-		    	mapIntent.putExtra(PIN_LAT, stationsList.get(position).get(KEY_LATITUDE));
+				mapIntent.putExtra(PIN_LONG, "-78.6382924");
+		    	mapIntent.putExtra(PIN_LAT, "35.7748033");
 				
 				//Button to send to maps view
 				Button mapButton = (Button) dialog.findViewById(R.id.mapButton);
