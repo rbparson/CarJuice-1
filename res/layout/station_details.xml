@@ -43,7 +43,7 @@
 		     <Button
 		     	android:id="@+id/mapButton"
 		     	android:layout_width="fill_parent"
-		     	android:layout_height="wrap_content"
+		     	android:layout_height="37dp"
 		     	android:layout_alignParentLeft="true"
 		     	android:layout_alignParentRight="true"
 		     	android:layout_marginRight="40dp"
@@ -137,7 +137,7 @@
 		    <Button
 		 	    android:id="@+id/dialogButtonOK"
 		 	    android:layout_width="fill_parent"
-		 	    android:layout_height="65dp"
+		 	    android:layout_height="48dp"
 		 	    android:layout_alignParentBottom="true"
 		 	    android:layout_alignParentLeft="true"
 		 	    android:layout_marginRight="3dp"
