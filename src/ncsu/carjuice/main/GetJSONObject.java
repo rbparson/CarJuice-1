@@ -97,7 +97,7 @@ public class GetJSONObject {
 			}
 			inputStream.close();
 			bufferedReader.close();
-			result=stringBuilder.toString();
+			result = stringBuilder.toString();
 		}catch(Exception e){
 			Log.e("LOG_TAG", "Error parsing http response "+ e.toString());
 		}
