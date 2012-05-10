@@ -2,6 +2,7 @@ package ncsu.carjuice.main;
 
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
@@ -14,14 +15,16 @@ import com.google.android.maps.OverlayItem;
 
 public class MapsActivity extends MapActivity {
 	
-	String latitude = "35.7743529";
-	String longitude = "-78.6423389";
-	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
         
+        Intent mapIntent = getIntent();
+        
+        String latitude = mapIntent.getStringExtra(StationsListActivity.PIN_LAT);
+    	String longitude = mapIntent.getStringExtra(StationsListActivity.PIN_LONG);
+ 
         
         MapView mapView = (MapView) findViewById(R.id.mapView);
         mapView.setBuiltInZoomControls(true); // Displaying Zooming controls
