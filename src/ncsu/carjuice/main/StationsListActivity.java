@@ -3,25 +3,23 @@ package ncsu.carjuice.main;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
-import android.view.Window;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.widget.TextView;
 
 public class StationsListActivity extends Activity { 
 
@@ -192,6 +190,8 @@ public class StationsListActivity extends Activity {
 				TextView intersection = (TextView) dialog.findViewById(R.id.intersection);
 				intersection.setText("First right after intersection of Hillsborough St. and Dixie Trail");
 				
+				final Intent mapIntent = new Intent(context, MapsActivity.class);
+				
 				//Button to send to maps view
 				Button mapButton = (Button) dialog.findViewById(R.id.mapButton);
 				// if button is clicked, close the custom dialog
@@ -199,7 +199,7 @@ public class StationsListActivity extends Activity {
 				{
 					public void onClick(View v) 
 					{
-						//Send to map View here
+						startActivity(mapIntent);
 					}
 				});
 				
