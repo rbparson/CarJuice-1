@@ -10,7 +10,7 @@
     android:layout_marginTop="10dp"
     android:layout_marginLeft="13dp"
     android:layout_marginRight="13dp"
-    android:layout_marginBottom="15dp"
+    android:layout_marginBottom="13dp"
     android:textColor="#00CD00"
     android:textSize="20sp" />
 

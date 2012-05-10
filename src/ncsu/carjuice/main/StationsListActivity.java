@@ -56,7 +56,9 @@ public class StationsListActivity extends Activity {
 	
     @Override
 	public void onCreate(Bundle savedInstanceState) {
+    	
     	Intent queryIntent = getIntent();
+    	
     	if(!queryIntent.getStringExtra(MainActivity.SEARCH_QUERY).equals("")){
     		query = queryIntent.getStringExtra(MainActivity.SEARCH_QUERY);
     		JSONObject = (new GetJSONObject(query, 30).returnJSONObject() );  //@@@@@@@@@@@@@@@@@still using hard coded radius param of 30@@@@@@@@@@@@@@@@@@@@@@@@
@@ -185,8 +187,8 @@ public class StationsListActivity extends Activity {
 				
 				final Intent mapIntent = new Intent(context, MapsActivity.class);
 				
-				mapIntent.putExtra(PIN_LONG, "-78.6382924");   	//@@@@@@@@@@@@@@@@@-hard coded values-@@@@@@@@@@@@@@@@
-		    	mapIntent.putExtra(PIN_LAT, "35.7748033");		//@@@@@@@@@@@@@@@@@-hard coded values-@@@@@@@@@@@@@@@@
+				mapIntent.putExtra(PIN_LONG, stationsList.get(position).get(KEY_LONGITUDE));
+		    	mapIntent.putExtra(PIN_LAT, stationsList.get(position).get(KEY_LATITUDE));
 				
 				//Button to send to maps view
 				Button mapButton = (Button) dialog.findViewById(R.id.mapButton);
