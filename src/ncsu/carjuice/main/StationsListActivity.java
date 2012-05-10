@@ -27,10 +27,10 @@ public class StationsListActivity extends Activity {
 	static final String KEY_ADDRESS = "address";					
 	static final String KEY_INTERSECTION = "intersection";				//Brief additional information about how to locate the station.
 	static final String KEY_CITY = "city";							
-	static final String KEY_STATE = "state";							//The two character U.S. state or Canadian province code of the station's location.
+	static final String KEY_STATE = "state";							//The two character U.S. state or  of the station's location.
 	static final String KEY_ZIP = "zip";							
 	static final String KEY_PHONE_NUMBER = "phoneNumber";
-	static final String KEY_GROUPS_WITH_ACCESS = "groupsWithAccess";	//A description of who is allowed to access the station and other station access information
+	static final String KEY_GROUPS_WITH_ACCESS = "groupsWithAccess";	//A description of who is allowed to access the station
 	static final String KEY_OPERATING_HOURS = "operatingHours";
 	static final String KEY_PAYMENT_TYPES = "paymentTypes";				//A space-separated list of payment methods accepted. 
 																		/**
@@ -73,13 +73,13 @@ public class StationsListActivity extends Activity {
     JSONObject JSONObject;
     final Context context = this;
     static final String LOG_TAG = "JSONParsing";
-    
+    ArrayList<HashMap<String, String>> stationsList = new ArrayList<HashMap<String, String>>();
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_view);
 	
-		ArrayList<HashMap<String, String>> stationsList = new ArrayList<HashMap<String, String>>();
+		
 		
 		//using temp params
 		JSONObject = (new GetJSONObject("27607", 10).returnJSONObject() );
@@ -173,14 +173,15 @@ public class StationsListActivity extends Activity {
         // Click event for single list row
         list.setOnItemClickListener(new OnItemClickListener() {
  
-            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {            	
             	// custom dialog
 				final Dialog dialog = new Dialog(context);
 				dialog.setContentView(R.layout.station_details);
 				
 				//Set the title, probably station name?
-				dialog.setTitle("Title...");
+				dialog.setTitle(stationsList.get(position).get(KEY_NAME));
 				
+				Log.d("POSITION", "the position is " + position);
 				TextView address = (TextView) dialog.findViewById(R.id.address);
 				address.setText("12 Shepherd Drive, Raleigh, NC 27607");
 				
