@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+	android:layout_height="wrap_content" >
+	
+    <TextView
+    android:id="@+id/stationName"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="13dp"
+    android:layout_marginRight="13dp"
+    android:layout_marginBottom="15dp"
+    android:textColor="#00CD00"
+    android:textSize="20sp" />
+
+    <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/stationName">
         
 	    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:layout_width="fill_parent"
@@ -47,8 +64,8 @@
 		     	android:layout_alignParentLeft="true"
 		     	android:layout_alignParentRight="true"
 		     	android:layout_marginRight="40dp"
+		     	android:layout_marginLeft="40dp"
 		 	    android:layout_marginBottom="5dp"
-		 	    android:layout_marginLeft="40dp"
 		     	android:layout_below="@+id/intersection"
 		     	android:text="@string/map_it" />
 		    
@@ -125,7 +142,10 @@
 		        android:textColor="#FFF" 
 		        android:layout_below="@+id/groupsWithAccess"/>
 		    
-		    <Button
+		    
+		</RelativeLayout>
+    </ScrollView>
+    <Button
 		 	    android:id="@+id/dialogButtonOK"
 		 	    android:layout_width="fill_parent"
 		 	    android:layout_height="48dp"
@@ -135,6 +155,5 @@
 		 	    android:layout_marginBottom="3dp"
 		 	    android:layout_marginLeft="3dp"
 		 	    android:text="@string/dialog_back"
-		 	    android:layout_below="@+id/telephone"/>
-		</RelativeLayout>
-    </ScrollView>
+		 	    />
+</RelativeLayout>
