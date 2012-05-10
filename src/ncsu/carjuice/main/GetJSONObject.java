@@ -16,6 +16,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 
 /**
@@ -86,7 +90,8 @@ public class GetJSONObject {
 			HttpEntity entity = response.getEntity();
 			inputStream = entity.getContent();
 		}catch(HttpResponseException e){
-			Log.e("LOG_TAG", "http error response "+ e.toString());  //@@@@@@@@@@@@@@need to add pop up dialog saying invalid location, and send the user back to the main screen@@@@@@@@@@@@@@@@@@@@@@@
+			Log.e("LOG_TAG", "http error response "+ e.toString());
+					//@@@@@@@@@@@@@@need to add pop up dialog saying invalid location, and send the user back to the main screen@@@@@@@@@@@@@@@@@@@@@@@
 		}
 		catch(Exception e){
 			Log.e("LOG_TAG", "Error in http connection "+ e.toString()); 

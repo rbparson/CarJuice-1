@@ -1,9 +1,11 @@
 package ncsu.carjuice.main;
 
+import ncsu.carjuice.main.GetLocation.LocationResult;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -22,14 +24,13 @@ public class MainActivity extends Activity {
 	private String latitude;
 
     /** Called when the activity is first created. */
-   	
     @Override
     //@param savedInstanceState
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-/*   
+ /* 
 //****On the emulator this code is causing force close due to not being able to 
 //    get GPS or network location, commented out for now 
 
@@ -42,6 +43,7 @@ public class MainActivity extends Activity {
             	latitude = location.getLatitude()+"";
             	longitude = location.getLongitude()+"";
             }
+
         };
         GetLocation myLocation = new GetLocation();
         myLocation.getLocation(this, locationResult);        
@@ -51,7 +53,6 @@ public class MainActivity extends Activity {
         
     }
     
-    
     //Sends an intent to the SettingsActivity, attached to the settings icon
     public void viewSettings(View view) {
     	
@@ -60,24 +61,7 @@ public class MainActivity extends Activity {
 	
     }// of viewSettings 
     
-   
-    public void invalidSearchAlert ()
-    {
-    	
-		final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-		alertDialog.setTitle("Invalid Input");
-		alertDialog.setMessage("Please Enter a Valid Address, City, State, or Zip Code");
-		
-		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
-		      public void onClick(DialogInterface dialog, int which) {
-		 	       alertDialog.dismiss();
-		    } });
-		
-		alertDialog.show();
-		
-    }
     
-
     //Message sent by Search button. Sends an intent to the listview activity
     public void sendQuery(View view) {
     	

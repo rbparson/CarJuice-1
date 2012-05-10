@@ -8,8 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,6 +56,7 @@ public class StationsListActivity extends Activity {
 	private final Context context = this;
     private ArrayList<HashMap<String, String>> stationsList = new ArrayList<HashMap<String, String>>();
 	
+    
     @Override
 	public void onCreate(Bundle savedInstanceState) {
     	
@@ -70,18 +73,22 @@ public class StationsListActivity extends Activity {
         	JSONObject = (new GetJSONObject(latitude, longitude, 30).returnJSONObject() );  //@@@@@@@@@@@@@@@@@still using hard coded radius param of 30@@@@@@@@@@@@@@@@@@@@@@@@
     		Log.d(LOG_TAG, "JSON object set using search query constructor");
     	}
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.list_view);
-	
-		JSONArray JSONStationsArray = null;
+    	
+    	JSONArray JSONStationsArray = null;
 		if(JSONObject != null && !JSONObject.equals("")){
 			try {
 				JSONStationsArray = JSONObject.getJSONArray("fuel_stations");
 				Log.d(LOG_TAG, "The number of stations to parse is =" + JSONStationsArray.length());
+				if(JSONStationsArray.length() == 0){
+					invalidSearchAlert(); // error invalid input, pops up dialog and then sends back to MainActivity
+				}
 			}catch (JSONException e) {
 				Log.e(LOG_TAG, "Could not find stations array");
 			}
-			
+
+    	super.onCreate(savedInstanceState);
+		setContentView(R.layout.list_view);
+		
 			for (int i = 0; i < JSONStationsArray.length(); i++) {
 				// creating new HashMap
 				HashMap<String, String> map = new HashMap<String, String>();
@@ -142,30 +149,24 @@ public class StationsListActivity extends Activity {
 
 					//adding HashList to ArrayList
 					stationsList.add(map);
-					
 				} catch (JSONException e) {
 					Log.e(LOG_TAG, "Could not parse station data");
 				}
+				
 			} //end if loop
 			
 	    list = (ListView) findViewById(R.id.list);
-		 
         // Getting adapter by passing JSON data ArrayList
         adapter = new ListViewAdapter(this, stationsList);
         list.setAdapter(adapter);
  
         // Click event for single list row
         list.setOnItemClickListener(new OnItemClickListener() {
- 
-            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {            	
-            	// custom dialog
+        	
+        	public void onItemClick(AdapterView<?> parent, View view,int position, long id) {            	
 				final Dialog dialog = new Dialog(context);
 				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialog.setContentView(R.layout.station_details);
-				
-				//Set the title, probably station name?
-				//dialog.setTitle(stationsList.get(position).get(KEY_NAME));
-				Log.d("POSITION", "the position is " + position);
 				
 				TextView stationName = (TextView) dialog.findViewById(R.id.stationName);
 				stationName.setText(stationsList.get(position).get(KEY_NAME));
@@ -276,5 +277,20 @@ public class StationsListActivity extends Activity {
 		}
 		
     } //end onCreate()
-
-}//end class    
+ 
+//------------------------------private method----------------------------------------------------------------------
+    private void invalidSearchAlert(){
+		final AlertDialog alertDialog = new AlertDialog.Builder(StationsListActivity.this).create();
+		alertDialog.setTitle("Invalid Input");
+		alertDialog.setMessage("Please Enter a Valid Address, City, State, or Zip Code");
+		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+		      public void onClick(DialogInterface dialog, int which) {
+		    	  alertDialog.dismiss();
+		 	      Intent intent = new Intent(context, MainActivity.class);
+		 	      startActivity(intent);
+		    } });
+		alertDialog.show();	
+    } //end invalidSearchAlert
+//------------------------------ end private method----------------------------------------------------------------------
+    
+} //end class    
