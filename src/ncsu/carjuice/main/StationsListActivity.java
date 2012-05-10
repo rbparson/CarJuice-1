@@ -21,7 +21,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class StationsListActivity extends Activity { 
+public class StationsListActivity extends Activity {
+	
+	
 
 	static final String KEY_NAME = "name";							
 	static final String KEY_ADDRESS = "address";					
@@ -67,7 +69,9 @@ public class StationsListActivity extends Activity {
 	static final String KEY_DC_FAST_CHARGERS = "dcFastChargers";		//The number of DC Fast Chargers
 	static final String KEY_STATION_ID = "stationId";					//A unique identifier for this specific station.
 	
-	
+	String query="";
+	String longitude;
+	String latitude;
 	ListView list;
     ListViewAdapter adapter;
     JSONObject JSONObject;
@@ -76,6 +80,22 @@ public class StationsListActivity extends Activity {
     ArrayList<HashMap<String, String>> stationsList = new ArrayList<HashMap<String, String>>();
     @Override
 	public void onCreate(Bundle savedInstanceState) {
+    	
+    	Intent queryIntent = getIntent();
+    	
+    	if(!queryIntent.getStringExtra(MainActivity.SEARCH_QUERY).equals(""))
+    	{
+    		query = queryIntent.getStringExtra(MainActivity.SEARCH_QUERY);
+    	}
+    	else
+    	{
+    		longitude = queryIntent.getStringExtra(MainActivity.LONG);
+        	latitude = queryIntent.getStringExtra(MainActivity.LAT);
+    	}
+    	
+    	
+    	
+    	
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_view);
 	
@@ -252,7 +272,8 @@ public class StationsListActivity extends Activity {
 		}
 		
     } //end onCreate()
-} //end class    
+
+}//end class    
     
     
 

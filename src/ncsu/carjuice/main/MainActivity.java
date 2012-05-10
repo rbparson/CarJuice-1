@@ -12,6 +12,11 @@ public class MainActivity extends Activity {
 	
 	//Creating the search query string to send along bundled with the intent to list view
 	public final static String SEARCH_QUERY = "ncsu.carjuice.main.MESSAGE";
+	public final static String LONG = "ncsu.carjuice.main.MESSAGE";
+	public final static String LAT = "ncsu.carjuice.main.MESSAGE";
+	
+	String longitude;
+	String latitude;
 
     /** Called when the activity is first created. */
    	
@@ -30,11 +35,9 @@ public class MainActivity extends Activity {
       
         LocationResult locationResult = new LocationResult(){
             @Override
-            public void gotLocation(Location location){
-                //Got the location!
-            	// now use location.methods to get long and lat to pass to http request
-            	JSONWorker jaSON = new JSONWorker();
-            	jaSON.getUrlMyLocation(location.getLongitude()+"", location.getLongitude()+"");
+            public void gotLocation(Location location){        	           	
+            	latitude = location.getLatitude()+"";
+            	longitude = location.getLongitude()+"";
             }
         };
         GetLocation myLocation = new GetLocation();
@@ -51,6 +54,9 @@ public class MainActivity extends Activity {
         // Do something in response to button
     	Intent intent = new Intent(this, StationsListActivity.class);
     	
+    	
+    	intent.putExtra(LONG, longitude);
+    	intent.putExtra(LONG, latitude);
     	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
     	//Intent also carries with it the SEARCH_QUERY
     	startActivity(intent);
