@@ -70,29 +70,24 @@ public class MainActivity extends Activity {
         // Do something in response to button
     	Intent intent = new Intent(this, StationsListActivity.class);
     	
-    	
     	EditText editText = (EditText) findViewById(R.id.edit_address);
-    	String message = editText.getText().toString();
+    	String message = editText.getText().toString().trim();
     	
-    	if(message.length()==0)
-    	{
+    	if(message.length() == 0){
     		final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-    		alertDialog.setTitle("Please Enter Address");
-    		alertDialog.setMessage("Enter a complete address, a city, state, or zip");
+    		alertDialog.setTitle("Invalid Address Entered");
+    		alertDialog.setMessage("Please Enter a Valid Address, or a City, or a State, or a Zip Code");
     		
     		alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
     		      public void onClick(DialogInterface dialog, int which) {
-    		 
-    		       alertDialog.dismiss();
-    		 
+    		 	       alertDialog.dismiss();
     		    } });
     		
     		alertDialog.show();
-    		
     	}
     	else{
     		intent.putExtra(SEARCH_QUERY, message);
-    		//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
+    		//Starts instance of the activity called by intent parameter, in this case: StationsListActivity
         	//Intent also carries with it the SEARCH_QUERY
         	startActivity(intent);
     	}

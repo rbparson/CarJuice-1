@@ -2,12 +2,21 @@
 <resources>
 
     <string name="app_name">CarJuice</string>
-    <string name="edit_address">Enter an address, zip code, or state</string>
+    <string name="edit_address">Address, or City or State or Zip Code</string>
     <string name="search">Search</string>
     <string name="button_locate">Locate</string>
     <string name="search_hint">Enter an address</string>
     <string name="app_label">Some Text</string>
     <string name="dialog_back">Back</string>
     <string name="map_it">Map It</string>
+    <string name="locate_button_shiny">Locate Button Shiny</string>
+    <string name="search_box">Search Box</string>
+    <string name="locate_button">Locate Button</string>
+    <string name="settings_button">Settings Button</string>
+    <string name="navigationicon">navigationIcon</string>
+    <string name="charging_station_name">Charging Station Name</string>
+    <string name="_1234_somewhere_st_">1234 Somewhere St.</string>
+    <string name="_5_45_miles">5.45 miles</string>
+    <string name="rightend_arrow">RightEnd Arrow</string>
 
 </resources>

@@ -16,14 +16,12 @@ public class ListViewAdapter extends BaseAdapter {
     
     private Activity activity;
     private ArrayList<HashMap<String, String>> dataArrayList;
-    private static LayoutInflater inflater = null;
-    //public ImageLoader imageLoader; 
+    private static LayoutInflater inflater = null; 
     
     public ListViewAdapter(Activity activity1, ArrayList<HashMap<String, String>> arrayList) {
         activity = activity1;
         dataArrayList = arrayList;
         inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //imageLoader = new ImageLoader (activity.getApplicationContext());
     }
 
     public int getCount() {
@@ -51,10 +49,10 @@ public class ListViewAdapter extends BaseAdapter {
         HashMap<String, String> stationMap = new HashMap<String, String>();
         stationMap = dataArrayList.get(position);
         
-        // Setting all values in listview
+        // Setting all values in list view
         name.setText(stationMap.get(StationsListActivity.KEY_NAME));
-        address.setText(stationMap.get(StationsListActivity.KEY_ADDRESS));
-        distance.setText(stationMap.get(StationsListActivity.KEY_DISTANCE));
+        address.setText(stationMap.get(StationsListActivity.KEY_ADDRESS) + "\n" + stationMap.get(StationsListActivity.KEY_CITY)+ ", "+ stationMap.get(StationsListActivity.KEY_STATE)+"  "+ stationMap.get(StationsListActivity.KEY_ZIP));
+        distance.setText(stationMap.get(StationsListActivity.KEY_DISTANCE).substring(0, 4) + "  Miles");
         //imageLoader.DisplayImage(stationMap.get(CustomizedListView.KEY_THUMB_URL), thumb_image);
         return view;
     }

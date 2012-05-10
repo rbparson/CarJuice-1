@@ -58,20 +58,18 @@ public class StationsListActivity extends Activity {
     	Intent queryIntent = getIntent();
     	if(!queryIntent.getStringExtra(MainActivity.SEARCH_QUERY).equals("")){
     		query = queryIntent.getStringExtra(MainActivity.SEARCH_QUERY);
-    		JSONObject = (new GetJSONObject(query, 30).returnJSONObject() );  //**************still using hard coded radius param of 30
+    		JSONObject = (new GetJSONObject(query, 30).returnJSONObject() );  //@@@@@@@@@@@@@@@@@still using hard coded radius param of 30@@@@@@@@@@@@@@@@@@@@@@@@
     		Log.d(LOG_TAG, "JSON object set using search query constructor");
     	}
     	else{
     		longitude = queryIntent.getStringExtra(MainActivity.LONG);
         	latitude = queryIntent.getStringExtra(MainActivity.LAT);
-        	JSONObject = (new GetJSONObject(latitude, longitude, 30).returnJSONObject() );  //**************still using hard coded radius param of 30
+        	JSONObject = (new GetJSONObject(latitude, longitude, 30).returnJSONObject() );  //@@@@@@@@@@@@@@@@@still using hard coded radius param of 30@@@@@@@@@@@@@@@@@@@@@@@@
     		Log.d(LOG_TAG, "JSON object set using search query constructor");
     	}
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_view);
 	
-		
 		JSONArray JSONStationsArray = null;
 		if(JSONObject != null && !JSONObject.equals("")){
 			try {
@@ -165,27 +163,24 @@ public class StationsListActivity extends Activity {
 				dialog.setTitle(stationsList.get(position).get(KEY_NAME));
 				
 				TextView address = (TextView) dialog.findViewById(R.id.address);
-				address.setText(stationsList.get(position).get(KEY_ADDRESS)+" "+stationsList.get(position).get(KEY_CITY)+ ", "+stationsList.get(position).get(KEY_STATE)+" "+stationsList.get(position).get(KEY_ZIP));
+				address.setText(stationsList.get(position).get(KEY_ADDRESS) + "\n" + stationsList.get(position).get(KEY_CITY)+ ", "+ stationsList.get(position).get(KEY_STATE)+"   "+ stationsList.get(position).get(KEY_ZIP));
 				
 				TextView distance = (TextView) dialog.findViewById(R.id.distance);
-				distance.setText("Distance: "+stationsList.get(position).get(KEY_DISTANCE));
+				distance.setText("Distance: "+ stationsList.get(position).get(KEY_DISTANCE).substring(0, 4) + " Miles");
 				
-				if(stationsList.get(position).get(KEY_INTERSECTION).equals("null"))
-				{
+				if(stationsList.get(position).get(KEY_INTERSECTION).equals("null")) {
 					TextView intersection = (TextView) dialog.findViewById(R.id.intersection);
-					intersection.setText("Intersection: None provided");
+					intersection.setText("Intersection: None Provided");
 				}
-				else
-				{
+				else{
 					TextView intersection = (TextView) dialog.findViewById(R.id.intersection);
 					intersection.setText("Intersection: "+stationsList.get(position).get(KEY_INTERSECTION));
 				}
 				
-				
 				final Intent mapIntent = new Intent(context, MapsActivity.class);
 				
-				mapIntent.putExtra(PIN_LONG, "-78.6382924");
-		    	mapIntent.putExtra(PIN_LAT, "35.7748033");
+				mapIntent.putExtra(PIN_LONG, "-78.6382924");   	//@@@@@@@@@@@@@@@@@-hard coded values-@@@@@@@@@@@@@@@@
+		    	mapIntent.putExtra(PIN_LAT, "35.7748033");		//@@@@@@@@@@@@@@@@@-hard coded values-@@@@@@@@@@@@@@@@
 				
 				//Button to send to maps view
 				Button mapButton = (Button) dialog.findViewById(R.id.mapButton);
@@ -210,54 +205,48 @@ public class StationsListActivity extends Activity {
 				operatingHours.setText("Operating Hours: "+stationsList.get(position).get(KEY_OPERATING_HOURS));
 				
 				//Parsing various kinds of owners
-				if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("SG"))
-				{
+				if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("SG")){
 					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
 					ownerType.setText("Owned by: State Government");
 				}
-				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("LG"))
-				{
+				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("LG")){
 					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
 					ownerType.setText("Owned by: Local Government");
 				}
-				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("FG"))
-				{
+				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("FG")){
 					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
 					ownerType.setText("Owned by: Federal Government");
 				}
-				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("P"))
-				{
+				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("P")){
 					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
 					ownerType.setText("Owned by: Private Owner");
 				}
-				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("T"))
-				{
+				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("T")){
 					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
 					ownerType.setText("Owned by: Utility Owner");
 				}
 				
-
-				//Should we just make this text a link to the website?
-				if(stationsList.get(position).get(KEY_CHARGING_NETWORK).equals("null"))
-				{
+				
+				if(stationsList.get(position).get(KEY_CHARGING_NETWORK).equals("null")){
 					TextView network = (TextView) dialog.findViewById(R.id.network);
 					network.setText("Network: None");
 				}
-				else
-				{
-
-				//Should we just make this text a link to the website?  ***the website is rarely returned it seems, so might be an issue
-				TextView network = (TextView) dialog.findViewById(R.id.network);
-				network.setText("Network: "+stationsList.get(position).get(KEY_CHARGING_NETWORK));
+				else{
+					TextView network = (TextView) dialog.findViewById(R.id.network);
+					network.setText("Network: "+ stationsList.get(position).get(KEY_CHARGING_NETWORK));
 				}
 				
 				TextView groupsWithAccess = (TextView) dialog.findViewById(R.id.groupsWithAccess);
-
-				groupsWithAccess.setText("Groups With Access: "+stationsList.get(position).get(KEY_GROUPS_WITH_ACCESS));
+				groupsWithAccess.setText("Groups With Access: "+ stationsList.get(position).get(KEY_GROUPS_WITH_ACCESS));
 								
-				TextView telephone = (TextView) dialog.findViewById(R.id.telephone);
-				telephone.setText("Station Phone: "+stationsList.get(position).get(KEY_PHONE_NUMBER));
-
+				if(stationsList.get(position).get(KEY_PHONE_NUMBER).equals("null")){
+					TextView telephone = (TextView) dialog.findViewById(R.id.telephone);
+					telephone.setText("Station Phone: None Provided");
+				}
+				else{
+					TextView telephone = (TextView) dialog.findViewById(R.id.telephone);
+					telephone.setText("Station Phone: " + stationsList.get(position).get(KEY_PHONE_NUMBER));
+				}
 				Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);			
 				
 				// if button is clicked, close the custom dialog
@@ -266,7 +255,7 @@ public class StationsListActivity extends Activity {
 						dialog.dismiss();
 					}
 				}); // end onClick
-
+				
 				//Display the station details dialog
 				dialog.show();
 		      

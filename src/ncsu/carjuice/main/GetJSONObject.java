@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
@@ -84,8 +85,11 @@ public class GetJSONObject {
 			HttpResponse response = httpClient.execute(httpGet);
 			HttpEntity entity = response.getEntity();
 			inputStream = entity.getContent();
-		}catch(Exception e){
-			Log.e("LOG_TAG", "Error in http connection "+ e.toString());
+		}catch(HttpResponseException e){
+			Log.e("LOG_TAG", "http error response "+ e.toString());  //@@@@@@@@@@@@@@need to add pop up dialog saying invalid location, and send the user back to the main screen@@@@@@@@@@@@@@@@@@@@@@@
+		}
+		catch(Exception e){
+			Log.e("LOG_TAG", "Error in http connection "+ e.toString()); 
 		}
 		//convert the HTTP response to a JSON formatted String
 		try{
