@@ -207,10 +207,10 @@ public class StationsListActivity extends Activity {
 				address.setText(stationsList.get(position).get(KEY_ADDRESS));
 				
 				TextView distance = (TextView) dialog.findViewById(R.id.distance);
-				distance.setText(stationsList.get(position).get(KEY_DISTANCE));
+				distance.setText("Distance: "+stationsList.get(position).get(KEY_DISTANCE));
 				
 				TextView intersection = (TextView) dialog.findViewById(R.id.intersection);
-				intersection.setText(stationsList.get(position).get(KEY_INTERSECTION));
+				intersection.setText("Intersection: "+stationsList.get(position).get(KEY_INTERSECTION));
 				
 				final Intent mapIntent = new Intent(context, MapsActivity.class);
 				//Button to send to maps view
@@ -225,30 +225,66 @@ public class StationsListActivity extends Activity {
 				});
 				
 				TextView level1Chargers = (TextView) dialog.findViewById(R.id.level1Chargers);
-				level1Chargers.setText(stationsList.get(position).get(KEY_LEVEL1_CHARGERS));
+				level1Chargers.setText("Level 1 Chargers: "+stationsList.get(position).get(KEY_LEVEL1_CHARGERS));
 				
 				TextView level2Chargers = (TextView) dialog.findViewById(R.id.level2Chargers);
-				level2Chargers.setText(stationsList.get(position).get(KEY_LEVEL2_CHARGERS));
+				level2Chargers.setText("Level 2 Chargers: "+stationsList.get(position).get(KEY_LEVEL2_CHARGERS));
 				
 				TextView dcFastChargers = (TextView) dialog.findViewById(R.id.dcFastChargers);
-				dcFastChargers.setText(stationsList.get(position).get(KEY_DC_FAST_CHARGERS));
+				dcFastChargers.setText("DC Fast Chargers: "+stationsList.get(position).get(KEY_DC_FAST_CHARGERS));
 				
-				//Need to parse the codes to words
-				TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
-				ownerType.setText(stationsList.get(position).get(KEY_OWNER_TYPE));
+				TextView operatingHours = (TextView) dialog.findViewById(R.id.operatingHours);
+				operatingHours.setText("Operating Hours: "+stationsList.get(position).get(KEY_OPERATING_HOURS));
+				
+				//Parsing various kinds of owners
+				if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("SG"))
+				{
+					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
+					ownerType.setText("Owned by: State Government");
+				}
+				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("LG"))
+				{
+					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
+					ownerType.setText("Owned by: Local Government");
+				}
+				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("FG"))
+				{
+					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
+					ownerType.setText("Owned by: Federal Government");
+				}
+				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("P"))
+				{
+					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
+					ownerType.setText("Owned by: Private Owner");
+				}
+				else if(stationsList.get(position).get(KEY_OWNER_TYPE).equals("T"))
+				{
+					TextView ownerType = (TextView) dialog.findViewById(R.id.ownerType);
+					ownerType.setText("Owned by: Utility Owner");
+				}
 				
 				//Should we just make this text a link to the website?
 				TextView network = (TextView) dialog.findViewById(R.id.network);
-				network.setText(stationsList.get(position).get(KEY_CHARGING_NETWORK));
+				network.setText("Network: "+stationsList.get(position).get(KEY_CHARGING_NETWORK));
 				
 				TextView groupsWithAccess = (TextView) dialog.findViewById(R.id.groupsWithAccess);
-				groupsWithAccess.setText(stationsList.get(position).get(KEY_GROUPS_WITH_ACCESS));
+				groupsWithAccess.setText("Groups With Access: "+stationsList.get(position).get(KEY_GROUPS_WITH_ACCESS));
 				
-				TextView cardsAccepted = (TextView) dialog.findViewById(R.id.cardsAccepted);
-				cardsAccepted.setText(stationsList.get(position).get(KEY_PAYMENT_TYPES));
 				
+				if(stationsList.get(position).get(KEY_PAYMENT_TYPES).equals("null"))
+				{
+					TextView cardsAccepted = (TextView) dialog.findViewById(R.id.cardsAccepted);
+					cardsAccepted.setText("Payment Accepted: Unknown or free");
+				}
+				else
+				{
+					TextView cardsAccepted = (TextView) dialog.findViewById(R.id.cardsAccepted);
+					cardsAccepted.setText("Payment Accepted: "+stationsList.get(position).get(KEY_PAYMENT_TYPES));
+				}
+								
+			
 				TextView telephone = (TextView) dialog.findViewById(R.id.telephone);
-				telephone.setText(stationsList.get(position).get(KEY_PHONE_NUMBER));
+				telephone.setText("Station Phone: "+stationsList.get(position).get(KEY_PHONE_NUMBER));
 
 				Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);			
 				// if button is clicked, close the custom dialog
