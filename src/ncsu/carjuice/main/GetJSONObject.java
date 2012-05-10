@@ -37,7 +37,7 @@ public class GetJSONObject {
 	 * @param latitude
 	 * @param longitude
 	 */
-	public GetJSONObject(double latitude, double longitude, int radius){
+	public GetJSONObject(String latitude, String longitude, int radius){
 		this.latitude += latitude;
 		this.longitude += longitude;
 		this.radius += radius;
@@ -97,7 +97,7 @@ public class GetJSONObject {
 			}
 			inputStream.close();
 			bufferedReader.close();
-			result=stringBuilder.toString();
+			result = stringBuilder.toString();
 		}catch(Exception e){
 			Log.e("LOG_TAG", "Error parsing http response "+ e.toString());
 		}

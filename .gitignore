@@ -11,3 +11,4 @@ project.properties
 /bin/res/classes.dex
 /bin/resources.ap_
 /bin/jarlist.cache
+/gen
