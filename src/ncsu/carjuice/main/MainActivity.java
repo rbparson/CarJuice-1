@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -20,6 +24,7 @@ public class MainActivity extends Activity {
 	
 	private String longitude;
 	private String latitude;
+	private Integer radius;
 
     /** Called when the activity is first created. */
    	
@@ -29,6 +34,20 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		StringBuilder builder = new StringBuilder();
+
+		radius = Integer.parseInt( sharedPrefs.getString("radius", "-1"));   //should snag the i
+		
+		//to be safe
+		if (radius < 5)
+			radius = 5;
+		
+		//to confirm
+	     Toast.makeText(getApplicationContext(), 
+                "Search Radius is currently " + radius + " miles", Toast.LENGTH_LONG).show();
+		
 /*   
 //****On the emulator this code is causing force close due to not being able to 
 //    get GPS or network location, commented out for now 
@@ -58,8 +77,7 @@ public class MainActivity extends Activity {
     	Intent intent = new Intent(this, SettingsActivity.class);	
     	startActivity(intent);
 	
-    }// of viewSettings 
-    
+    }// of viewSettings      
    
     public void invalidSearchAlert ()
     {

@@ -1,38 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="@drawable/bg_settings">
-
-
-<!-- checkboxes currently default to true -->
-
-	<CheckBox
-        android:id="@+id/stage1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="110dp"
-        android:layout_marginLeft="260dp"
-        />
- 
-    <CheckBox
-        android:id="@+id/stage2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="190dp"
-        android:layout_marginLeft="260dp" 
-        />
- 
-    <CheckBox
-        android:id="@+id/dcfast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="268dp"
-        android:layout_marginLeft="260dp"
-        />
-        
-        
-</RelativeLayout>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    
+	<TextView
+		android:id="@+id/settings_text_view"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content"
+	/>
+    
+</LinearLayout>
