@@ -49,6 +49,7 @@ public class AddItemizedOverlay extends ItemizedOverlay<OverlayItem> {
            this.populate();
        }
        
+       /*Toast with LONG/LAT on touching map
        @Override
        public boolean onTouchEvent(MotionEvent event, MapView mapView)
        {   
@@ -64,6 +65,7 @@ public class AddItemizedOverlay extends ItemizedOverlay<OverlayItem> {
                Toast.makeText(context, "Lat: " + lat + ", Lon: "+lon, Toast.LENGTH_SHORT).show();
            }
            return false;
-       } 
+       }
+       */ 
  
     }
