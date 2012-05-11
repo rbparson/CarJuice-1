@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
 	
 	private String longitude;
 	private String latitude;
-	private int radius;
+	private String radius;
 
     /** Called when the activity is first created. */
     @Override
@@ -37,23 +37,17 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
        
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-		
-		Intent intent = new Intent(this, StationsListActivity.class);
-		
 
-		radius = Integer.parseInt( sharedPrefs.getString("radius", "-1"));   //should snag the i
+		radius = sharedPrefs.getString("radius", "-1");   //should snag the i
 		
 		//to be safe
-		if (radius < 5)
-			radius = 5;
-		
-		intent.putExtra(RAD, radius);
-		
+		if (Integer.parseInt(radius) < 5)
+			radius = "5";
+
 		//to confirm
 	     Toast.makeText(getApplicationContext(), 
                 "Search Radius is currently " + radius + " miles", Toast.LENGTH_LONG).show();
 		
-	     startActivity(intent);
 
 //****On the emulator this code is causing force close due to not being able to 
 //    get GPS or network location, commented out for now 
@@ -73,7 +67,7 @@ public class MainActivity extends Activity {
         myLocation.getLocation(this, locationResult);        
         
 //----------------------------------end get location--------------------        
- 
+
         
     }
     
@@ -114,15 +108,15 @@ public class MainActivity extends Activity {
     	String message = editText.getText().toString().trim();
     	
     	if(message.length() == 0){
-    		
     		//putting empty string into Search Query so our logic in StationsListActivity works and we don't get null pointer exception
-    		intent.putExtra(SEARCH_QUERY, "");
-  /*  		
+    		intent.putExtra(SEARCH_QUERY, "");	
+    		intent.putExtra(RAD, radius);
+/*	
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ HARD CODED LONG/LAT @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    	
         	latitude="35.77435";
         	longitude="-78.64233";
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    	
-    */    	
+*/       	
         	intent.putExtra(LONG, longitude);
         	intent.putExtra(LAT, latitude);
         	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity
@@ -131,6 +125,7 @@ public class MainActivity extends Activity {
     		
     	}
     	else{
+    		intent.putExtra(RAD, radius);
     		intent.putExtra(SEARCH_QUERY, message);
     		//Starts instance of the activity called by intent parameter, in this case: StationsListActivity
         	//Intent also carries with it the SEARCH_QUERY
