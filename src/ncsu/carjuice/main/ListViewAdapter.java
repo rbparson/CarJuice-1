@@ -8,9 +8,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ListViewAdapter extends BaseAdapter {
     
@@ -44,7 +47,7 @@ public class ListViewAdapter extends BaseAdapter {
         TextView name = (TextView) view.findViewById(R.id.name); // name
         TextView address = (TextView) view.findViewById(R.id.address); // address
         TextView distance = (TextView) view.findViewById(R.id.distance); // distance
-        //ImageView thumb_image=(ImageView) view.findViewById(R.id.list_image); // thumb image
+        ImageView navigateIcon = (ImageView) view.findViewById(R.id.list_image); // thumb image
         
         HashMap<String, String> stationMap = new HashMap<String, String>();
         stationMap = dataArrayList.get(position);
@@ -53,7 +56,13 @@ public class ListViewAdapter extends BaseAdapter {
         name.setText(stationMap.get(StationsListActivity.KEY_NAME));
         address.setText(stationMap.get(StationsListActivity.KEY_ADDRESS) + "\n" + stationMap.get(StationsListActivity.KEY_CITY)+ ", "+ stationMap.get(StationsListActivity.KEY_STATE)+"  "+ stationMap.get(StationsListActivity.KEY_ZIP));
         distance.setText(stationMap.get(StationsListActivity.KEY_DISTANCE).substring(0, 4) + "  Miles");
+        
+		
+        
         //imageLoader.DisplayImage(stationMap.get(CustomizedListView.KEY_THUMB_URL), thumb_image);
         return view;
     }
+    public void navigate(View view){
+		
+	}
 }

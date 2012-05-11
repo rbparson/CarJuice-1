@@ -6,35 +6,40 @@
     android:orientation="horizontal"
     android:padding="5dip" >
 
-	<!--  ListRow Left sied Thumbnail image -->
+	<!--  ListRow Left sied Thumbnail image 
 	<LinearLayout android:id="@+id/thumbnail" 
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:padding="3dip"		
         android:layout_alignParentLeft="true" 
 	    android:layout_marginRight="5dip">
-        
+        -->
 	    <!-- *********maybe put the navigate button here******** -->
 		<ImageView 
 		    android:id="@+id/list_image"   
-	        android:layout_width="50dip"
-	        android:layout_height="50dip"
-	        android:src="@drawable/rihanna" 
+	        android:layout_width="25dip"
+	        android:layout_height="25dip"
+	        android:padding="3dip"
+	        android:onClick="navigate"
+	        android:layout_marginRight="5dip"
+	        android:layout_centerVertical="true"
+	        android:layout_alignParentLeft="true"
+	        android:src="@drawable/navigation" 
 	        android:contentDescription="@string/navigationicon"/>
         
-	</LinearLayout>
+	<!--  </LinearLayout>  -->
     
 	<!-- Station Name-->
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/thumbnail"
-        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_alignTop="@+id/list_image"
+        android:layout_toRightOf="@+id/list_image"
         android:text="@string/charging_station_name"
         android:textColor="#040404"
         android:typeface="sans" 
-        android:textSize="15dip"
+        android:textSize="12dip"
         android:textStyle="bold"/>
 
     <!-- ****may have to break up into address, city, state, zip or preform that string ***-->
@@ -45,11 +50,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
         android:textColor="#343434"
-        android:textSize="10dip"
+        android:textSize="11dip"
         android:layout_marginTop="2dip"
-        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_toRightOf="@+id/list_image"
         android:text="@string/_1234_somewhere_st_" />
-    <!--had to hit enter to make Raleigh, NC 27408 go to next line in text view -->
     
 
 	<!-- Rightend Distance --> <!-- old color blue "#10bcc9" -->
@@ -62,7 +66,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="right"
         android:text="@string/_5_45_miles"
-        android:textSize="10dip"
+        android:textSize="11dip"
         android:textColor="#343434"						
         android:textStyle="bold"/>
       

@@ -1,10 +1,12 @@
 package ncsu.carjuice.main;
 
+import ncsu.carjuice.main.GetLocation.LocationResult;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -21,22 +23,23 @@ public class MainActivity extends Activity {
 	protected final static String SEARCH_QUERY = "ncsu.carjuice.main.SEARCH_QUERY";
 	protected static String LONG = "ncsu.carjuice.main.LONG";
 	protected static String LAT = "ncsu.carjuice.main.LAT";
+	protected static String RAD = "ncsu.carjuice.main.RAD";
 	
 	private String longitude;
 	private String latitude;
-	private Integer radius;
+	private int radius;
 
     /** Called when the activity is first created. */
-   	
     @Override
     //@param savedInstanceState
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-
-        
+       
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-		StringBuilder builder = new StringBuilder();
+		
+		Intent intent = new Intent(this, StationsListActivity.class);
+		
 
 		radius = Integer.parseInt( sharedPrefs.getString("radius", "-1"));   //should snag the i
 		
@@ -44,11 +47,14 @@ public class MainActivity extends Activity {
 		if (radius < 5)
 			radius = 5;
 		
+		intent.putExtra(RAD, radius);
+		
 		//to confirm
 	     Toast.makeText(getApplicationContext(), 
                 "Search Radius is currently " + radius + " miles", Toast.LENGTH_LONG).show();
 		
-/*   
+	     startActivity(intent);
+
 //****On the emulator this code is causing force close due to not being able to 
 //    get GPS or network location, commented out for now 
 
@@ -61,15 +67,15 @@ public class MainActivity extends Activity {
             	latitude = location.getLatitude()+"";
             	longitude = location.getLongitude()+"";
             }
+
         };
         GetLocation myLocation = new GetLocation();
         myLocation.getLocation(this, locationResult);        
         
 //----------------------------------end get location--------------------        
- */       
+ 
         
     }
-    
     
     //Sends an intent to the SettingsActivity, attached to the settings icon
     public void viewSettings(View view) {
@@ -93,9 +99,10 @@ public class MainActivity extends Activity {
 		
 		alertDialog.show();
 		
-    }
+    }// of viewSettings 
     
 
+    
     //Message sent by Search button. Sends an intent to the listview activity
     public void sendQuery(View view) {
     	
@@ -110,12 +117,12 @@ public class MainActivity extends Activity {
     		
     		//putting empty string into Search Query so our logic in StationsListActivity works and we don't get null pointer exception
     		intent.putExtra(SEARCH_QUERY, "");
-    		
+  /*  		
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ HARD CODED LONG/LAT @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    	
         	latitude="35.77435";
         	longitude="-78.64233";
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    	
-        	
+    */    	
         	intent.putExtra(LONG, longitude);
         	intent.putExtra(LAT, latitude);
         	//Starts instance of the activity called by intent parameter, in this case: DisplayMessageActivity

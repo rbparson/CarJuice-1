@@ -38,7 +38,7 @@ public class GetJSONObject {
 	 * @param latitude
 	 * @param longitude
 	 */
-	public GetJSONObject(String latitude, String longitude, int radius){
+	public GetJSONObject(String latitude, String longitude, String radius){
 		this.latitude += latitude;
 		this.longitude += longitude;
 		this.radius += radius;
@@ -51,7 +51,7 @@ public class GetJSONObject {
 	 * Second Constructor - used to get Station info, given a free form string input of location by user
 	 * @param Location
 	 */
-	public GetJSONObject(String location, int radius){
+	public GetJSONObject(String location, String radius){
 		this.location += location;
 		this.radius += radius;
 		fullURL = baseURL + this.location + this.radius;
@@ -86,7 +86,8 @@ public class GetJSONObject {
 			HttpEntity entity = response.getEntity();
 			inputStream = entity.getContent();
 		}catch(HttpResponseException e){
-			Log.e("LOG_TAG", "http error response "+ e.toString());  //@@@@@@@@@@@@@@need to add pop up dialog saying invalid location, and send the user back to the main screen@@@@@@@@@@@@@@@@@@@@@@@
+			Log.e("LOG_TAG", "http error response "+ e.toString());
+					//@@@@@@@@@@@@@@need to add pop up dialog saying invalid location, and send the user back to the main screen@@@@@@@@@@@@@@@@@@@@@@@
 		}
 		catch(Exception e){
 			Log.e("LOG_TAG", "Error in http connection "+ e.toString()); 
