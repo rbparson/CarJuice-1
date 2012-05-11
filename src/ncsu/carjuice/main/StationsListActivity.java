@@ -64,7 +64,7 @@ public class StationsListActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
     	
     	Intent queryIntent = getIntent();
-    	
+
     	if(!queryIntent.getStringExtra(MainActivity.SEARCH_QUERY).equals("")){
     		query = queryIntent.getStringExtra(MainActivity.SEARCH_QUERY);
     		radius = queryIntent.getStringExtra(MainActivity.RAD);
