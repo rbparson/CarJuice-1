@@ -214,6 +214,13 @@ public class StationsListActivity extends Activity {
 					}
 				}); //end onClick
 				
+				TextView labelMap = (TextView) dialog.findViewById(R.id.labelMap);
+				labelMap.setText("Map it");
+			
+				TextView labelNav = (TextView) dialog.findViewById(R.id.labelNav);
+				labelNav.setText("Navigate");
+			
+				
 				TextView level1Chargers = (TextView) dialog.findViewById(R.id.level1Chargers);
 				level1Chargers.setText("Level 1 Chargers: "+stationsList.get(position).get(KEY_LEVEL1_CHARGERS));
 				

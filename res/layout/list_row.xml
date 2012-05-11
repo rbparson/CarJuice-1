@@ -17,14 +17,14 @@
 	    <!-- *********maybe put the navigate button here******** -->
 		<ImageView 
 		    android:id="@+id/list_image"   
-	        android:layout_width="25dip"
-	        android:layout_height="25dip"
+	        android:layout_width="40dip"
+	        android:layout_height="40dip"
 	        android:padding="3dip"
 	        android:onClick="navigate"
 	        android:layout_marginRight="5dip"
 	        android:layout_centerVertical="true"
 	        android:layout_alignParentLeft="true"
-	        android:src="@drawable/navigation" 
+	        android:src="@drawable/ic_launcher_carjuice" 
 	        android:contentDescription="@string/navigationicon"/>
         
 	<!--  </LinearLayout>  -->
