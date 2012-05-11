@@ -1,4 +1,3 @@
-*.apk
 *.class
 .classpath
 .settings/*
